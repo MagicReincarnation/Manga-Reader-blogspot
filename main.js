@@ -1,8 +1,23 @@
+/*!
+ * Project: Manga Reader
+ * Author: Hirutshuji
+ * Patner: Roka
+ * Website: https://datakodehiru.blogspot.com
+ * Github Repo: https://github.com/MagicReincarnation/Manga-Reader-blogspot
+ * Description: MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, LTR, dan vertikal. Fitur ini juga mendukung zoom, swipe, dan mini preview untuk navigasi yang lebih mudah.
+ * Version: 3.0.0
+ * License: MIT
+ * 
+ * Created: 2025-03-06
+ * Last Updated: 2025-03-06
+ * 
+ * Copyright (c) 2025 Hirutshuji & Roka
+ * All rights reserved.
+ */
 class MangaReader {
  constructor(options) {
   this.seriesId = options.seriesId;
   this.panelManga = options.pages;
-  // Ambil mode dari options atau nanti dari IndexedDB
   this._mode_reading_hr = options.mode || 'rtl';
   this.active_panel_read = options.startIndex || 0;
   this.lazyload_bacth = options.lazyBatch || 3;
