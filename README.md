@@ -2,6 +2,8 @@
 
 MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, LTR, dan vertikal. Fitur ini juga mendukung zoom, swipe, dan mini preview untuk navigasi yang lebih mudah.
 
+# Demo 
+  * Link: [Video](https://youtu.be/Uj22Juxilh0?si=5HwyMtHNdshOe6AD)
 ---
 
 # Fitur Utama
