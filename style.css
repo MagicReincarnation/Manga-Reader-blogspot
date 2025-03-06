@@ -1,0 +1,266 @@
+/* CSS Umum */
+body {
+ background: #222;
+ color: #fff;
+ font-family: Arial, sans-serif;
+ margin: 0;
+ padding: 0;
+}
+
+.mode_manga_reader {
+ max-width: 1200px;
+ margin: 0 auto;
+ position: relative;
+ overflow: hidden;
+}
+
+.box_controls_mode {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding: 0;
+ position: fixed;
+ bottom: 26%;
+ right: 0;
+ z-index: 3;
+}
+
+.box_panelinfo {
+ display: inline-flex;
+ flex-direction: column;
+ align-items: center;
+ position: sticky;
+ bottom: 20%;
+ right: 45%;
+ left: 45%;
+ z-index: 4;
+ border-radius: 4px;
+ padding: 4px 8px;
+}
+
+span#page_panel_active_info {
+ bottom: 35px;
+ text-align: center;
+ font-size: 18px;
+ font-weight: bold;
+ color: #242424B3;
+ background: #F5F5F53D;
+ padding: 3px 12px;
+ border-radius: 12px;
+ left: 50%;
+ z-index: 4;
+}
+
+.reading-modes {
+ display: flex;
+ width: max-content;
+ flex-direction: column;
+}
+
+.mode-btn {
+ margin: 5px;
+ padding: 5px 10px;
+ background: #333;
+ border: none;
+ color: #fff;
+ cursor: pointer;
+ border-radius: 4px;
+}
+
+.mode-btn svg {
+ vertical-align: middle;
+ margin-right: 5px;
+}
+
+.mode-btn.active {
+ background: crimson;
+}
+
+/* untuk Swiper (LTR, RTL, Vertikal) */
+.swiper-container {
+ position: relative;
+ width: 100%;
+ height: 100vh;
+ background: transparent;
+}
+
+.swiper_init_divbox {
+ width: 100%;
+ height: 100%;
+}
+
+.swiper-slide {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.manga-page img {
+ max-width: 100%;
+ max-height: 100%;
+ object-fit: contain;
+}
+
+/* Longstrip */
+.longstrip-container {
+ position: relative;
+}
+.longstrip-container,.mini-preview {
+    scrollbar-width: none; /* Untuk Firefox */
+    -ms-overflow-style: none; /* Untuk Internet Explorer dan Edge */
+}
+.longstrip-container::-webkit-scrollbar,.mini-preview::-webkit-scrollbar {
+    display: none; /* Untuk Chrome, Safari, dan Opera */
+}
+
+.longstrip-slide {
+ width: 100%;
+}
+
+.longstrip-slide .manga-page img {
+ width: 100%;
+ display: block;
+}
+
+/* Mini Preview: ltr & rtl tampil di bawah, vertical & longstrip tampil di kiri */
+.mini-preview.bottom {
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ background: rgb(0 0 0 / 15%);
+ padding: 0;
+ display: block;
+ overflow-x: auto;
+ white-space: nowrap;
+ z-index: 3;
+}
+
+.mini-preview.left {
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ left: 0;
+ width: 120px;
+ background: rgb(0 0 0 / 15%);
+ padding: 5px;
+ display: flex;
+ flex-direction: column;
+ overflow-y: auto;
+ z-index: 3;
+}
+
+.mini-preview.left img {
+ width: -webkit-fill-available;
+ height: auto;
+}
+
+.mini-preview img {
+ width: 80px;
+ height: 80px;
+ object-fit: cover;
+ margin: 5px;
+ cursor: pointer;
+ border: 2px solid transparent;
+ display: inline-block;
+}
+
+.mini-preview img.active {
+ border-color: crimson;
+}
+
+.swiper-button-prev,
+.swiper-rtl .swiper-button-prev {
+ height: 100vh;
+/*left: 0 !important;
+right: unset; */
+ right: 0 !important;
+ left: unset;
+}
+
+.swiper-button-next,
+.swiper-rtl .swiper-button-next {
+ height: 100vh;
+ /*right: 0 !important; */
+ left: 0 !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+ top: 0;
+ bottom: 0;
+ width: 20%;
+ margin: 0;
+ color: transparent;
+ background: transparent;
+ -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+ z-index: 3;
+}
+.manga-page {
+ position: relative;
+ overflow: hidden;
+}
+img.lazy.belum_diload-off {
+ filter: blur(5px) brightness(0.5);
+}
+
+
+.manga-page.end-message {
+ word-wrap: break-word;
+ text-align: center;
+ display: block;
+ margin: 20px;
+ font-size: 14px;
+ color: #eaeaea;
+}
+
+.manga-page.end-message button {
+ padding: 8px 24px;
+ border-radius: 6px;
+ font-weight: 600;
+ margin: 20px;
+}
+
+.manga-page.end-message .prevbtn {
+ background: #ed4c14;
+ color: white;
+ border: 2px solid transparent;
+}
+
+.manga-page.end-message .nextbtn {
+ border: 2px solid whitesmoke;
+ background: transparent;
+ color: #fff;
+}
+
+
+.divloader {
+ position: absolute;
+ width: 100%;
+ height: 100%;
+}
+.divloader2, .divloader {
+ z-index: 4;
+ display: grid;
+ place-content: center;
+}
+
+.spinner-loader {
+ width: 40px;
+ height: 40px;
+ border: 4px solid rgba(255, 255, 255, 0.3);
+ border-top-color: #fff;
+ border-radius: 50%;
+ animation: spin 1s linear infinite;
+ margin: 10px auto;
+}
+
+@keyframes spin {
+ 0% {
+  transform: rotate(0deg);
+ }
+ 
+ 100% {
+  transform: rotate(360deg);
+ }
+}

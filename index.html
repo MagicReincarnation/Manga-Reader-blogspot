@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+ <title>Manga Reader - Gabungan Mode</title>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+ <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+ 
+ <!-- <b:with value='["Chapter"]' var='checkLabel'>
+  <b:if cond='data:post.labels any (i => i.name in data:checkLabel)'>
+   <b:loop values='data:post.labels filter (i => i.name not in data:checkLabel)' var='l'>
+   
+   expr:data-label="data:l.name"
+   -->
+ 
+ <div class="mode_manga_reader" data-label="Overlord">
+  <div class="box_controls_mode">
+   <div class="reading-modes">
+    <button class="mode-btn" data-mode="ltr"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+      <g transform="scale(-1, 1) translate(-24, 0)">
+       <path fill="currentColor" d="M3.616 19q-.691 0-1.153-.462T2 17.384V6.616q0-.691.463-1.153T3.616 5h1.807q.69 0 1.153.463t.463 1.153v10.769q0 .69-.463 1.153T5.423 19zm7.423 0q-.691 0-1.153-.462t-.463-1.153V6.615q0-.69.463-1.152T11.039 5h9.346q.69 0 1.153.463T22 6.616v10.769q0 .69-.462 1.153T20.385 19z" />
+      </g>
+     </svg>Left to rigth</button>
+    <button class="mode-btn" data-mode="rtl">️<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M3.616 19q-.691 0-1.153-.462T2 17.384V6.616q0-.691.463-1.153T3.616 5h1.807q.69 0 1.153.463t.463 1.153v10.769q0 .69-.463 1.153T5.423 19zm7.423 0q-.691 0-1.153-.462t-.463-1.153V6.615q0-.69.463-1.152T11.039 5h9.346q.69 0 1.153.463T22 6.616v10.769q0 .69-.462 1.153T20.385 19z" />
+     </svg>Rigth to left</button>
+    <button class="mode-btn" data-mode="vertical"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M22 11H2v2h20zm-4-4H6V4h12zm2-3a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-2 11a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2z" />
+     </svg> Vertical</button>
+    <button class="mode-btn" data-mode="longstrip"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M16 5.846c2.828 0 4.243 0 5.121.901C22 7.65 22 9.1 22 12s0 4.351-.879 5.253c-.878.9-2.293.9-5.121.9H8c-2.828 0-4.243 0-5.121-.9C2 16.35 2 14.9 2 12s0-4.351.879-5.253c.878-.9 2.293-.9 5.121-.9z" />
+      <path fill="currentColor" fill-rule="evenodd" d="M20.25 2.77a.76.76 0 0 1-.75.768h-15a.76.76 0 0 1-.75-.769A.76.76 0 0 1 4.5 2h15a.76.76 0 0 1 .75.77m0 18.46a.76.76 0 0 1-.75.77h-15a.76.76 0 0 1-.75-.77a.76.76 0 0 1 .75-.768h15a.76.76 0 0 1 .75.769" clip-rule="evenodd" />
+     </svg> Longstrip</button>
+   </div>
+  </div>
+  
+  <!-- Swiper -->
+  <div class="swiper-container" id="ltr_rtl_vertical_div_cc">
+   <div class="swiper_init_divbox">
+    <div class="swiper-wrapper">
+     <!-- Slide akan diinject oleh JS -->
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+   </div>
+  </div>
+  
+  <div class="mini-preview bottom" id="mini_preview_ltr_rtl_vertical_div_cc"></div>
+  
+  <!-- Longstrip -->
+  <div class="longstrip-container" id="longstrip_div_cc" style="display:none;">
+   <div class="longstrip_box" id="longstrip_box">
+    <!-- Slide longstrip akan diinject oleh JS -->
+   </div>
+  </div>
+ 
+  <div class="mini-preview left" id="mini_preview_longstrip_div_cc"></div>
+  
+ </div>
+ 
+ 
+ <div class="box_panelinfo">
+  <span id="page_panel_active_info">1/</span>
+ </div>
+ 
+ <!--
+   </b:loop>
+  </b:if>
+ </b:with>
+       -->
+ 
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+ 
+ <script>
+  // array halaman manga
+  const _link_manga_hr = [
+   'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4ObFrHoOz_kB4JjwN-gd4CaBkaviuK9z-3M80vd84G9c1KesIEATuXCHM7TNpQCIjgu3D7vcg3Qfgtaw3RE-paX2wXUYmDcyJ7spJOQhOMuMD5U27LC50yNaB27nQRMFZ7vN64j7WAaIeYqN8nglOiZZlv65_roQ1nvy-o1YHWpI16s6YGtNjpyHl0g/s1600/2.jpg',
+   
+   'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhh0m1jV6O8jVGAx3HERV5Uoitct56hFim3yvPCvHMvJZw1Jgn-0sTVlUSKc__bl7SPfHYusN6HXew91M0CZCy4R6G3EHD41lBDDF_pQUUlNLUSrSP8OhDKg6rCrNV9jxF6g_xRWL_cbyggC0a9iosaOliP5C5wyUf61qDND6ICDwMIvqP_MFT6no8BNA/s1600/3.jpg',
+   
+   'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzsSQhE6R0U_un4Ambqi2ENQTBwY-gJdEfShF5IfusFDEcKnnw9X722sLpwRzJ25jbVYHqAUxWI_rNOgC4l-zNDIthijVxiQmLX1CHs9klDvk6HKR3G3G7rESut1N7EB3Hce3M72vxJ67gxt5eYia-JOUMR8vU6lqUKd3-7FYL1Xly9hP5yOgAkkbMSA/s1600/4.jpg',
+   
+   '/asset/OreAku, Ore wa Seikan Kokka no Akutoku Ryōshu! - Chapter 29 - 17.jpg',
+   '/asset/Tonari no Seki no Yankee Shimizu-san ga Kami o Kuroku Sometekita - Chapter 02 - 27.jpg',
+   '/asset/Yankee Koukou ni Ojou-sama - Chapter 01 - 10.jpg',
+   '/asset/Yankee Koukou ni Ojou-sama - Chapter 01 - 11.jpg',
+   '/asset/Yankee Koukou ni Ojou-sama - Chapter 01 - 12.jpg',
+   '/asset/Yankee Koukou ni Ojou-sama - Chapter 01 - 13.jpg',
+   '/asset/Yankee Koukou ni Ojou-sama - Chapter 01 - 4.jpg',
+  ];
+ </script>
+ 
+ 
+ <script type="text/javascript">
+  /*<![CDATA[*/
+  /********** run Script MangaReader **********/
+  const _set_options_mode_reading = {
+   seriesId: document.querySelector('.mode_manga_reader')?.dataset.label || "",
+   pages: _link_manga_hr,
+   mode: 'rtl',
+   startIndex: 0,
+   lazyBatch: 1,
+   timer_loader: 500,
+   compresResolusi: true,
+   resolusi_higth: 's2048',
+   resolusi_low: 's160',
+   s_resolusi: "s2048",
+   default_url: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=",
+   custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=",
+  };
+  
+  document.addEventListener('DOMContentLoaded', () => {
+   window.reader = new MangaReader(_set_options_mode_reading);
+  });
+  /*]]>*/
+ </script>
+ 
+ <script src="script.js" type="text/javascript" charset="utf-8"></script>
+ 
+</body>
+
+</html>
