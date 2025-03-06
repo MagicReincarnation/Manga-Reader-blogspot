@@ -142,14 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ---
 
-#  Lisensi & Kredit
+#  Lisensi & Credit
 
-## Kredit:
+## Credit:
 
 1. Hirutshuji 
 2. Roka
 
 ## Lisensi MIT:
 
-🔹 Bebas digunakan & dimodifikasi: harap jangan dihapus kreditnya.
+🔹 Bebas digunakan & dimodifikasi: harap jangan dihapus Credit.
 
