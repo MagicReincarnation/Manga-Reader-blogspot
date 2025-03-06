@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     entah dihost lewat cdn/langsung keblog.
     atau bisa pakai aja ini yang sudah dihost
     ```html 
-    <script src="https://cdn.jsdelivr.net/gh/MagicReincarnation/Manga-Reader-blogspot@main/script.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/gh/MagicReincarnation/Manga-Reader-blogspot@main/main.js" type="text/javascript"></script>
     ```
 
 4. Klik tombol mode untuk mengganti mode baca
