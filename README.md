@@ -4,6 +4,8 @@ MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, L
 
 # Demo 
   * Link: [Video](https://youtu.be/Uj22Juxilh0?si=5HwyMtHNdshOe6AD)
+  * Live Demo: [Manga Reader](https://magicreincarnation.github.io/Manga-Reader-blogspot/)
+  * Generator Link: [Generator converter](https://magicreincarnation.github.io/Manga-Reader-blogspot/Generator-link/Generator.html)
 ---
 
 # Fitur Utama
