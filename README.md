@@ -122,6 +122,7 @@ const _set_options_mode_reading = {
  s_resolusi: "s2048", //default reso 
  default_url: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=", //custom img transparant lazy
  custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=",// custom img transparant mini preview lazy
+ custom_regexURL: /s\d{2,4}/g, //custom regex
 };
 // run: MangaReader Mode default saat DOM siap
 document.addEventListener('DOMContentLoaded', () => {
@@ -135,14 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ```html 
     <script src="https://cdn.jsdelivr.net/gh/MagicReincarnation/Manga-Reader-blogspot@main/main.js" type="text/javascript"></script>
     ```
-
-4. Klik tombol mode untuk mengganti mode baca
-
- 1. Longstrip = Scroll ke bawah
-
- 2. RTL/LTR = Navigasi kanan-kiri
-
- 3. Vertical = Navigasi atas-bawah
 
 ---
 

@@ -1,3 +1,7 @@
+ const fitur_custom_regex_url_convert = false;
+ const custom_regex_url_convert = /s\d{2,4}/g;
+ const ouput_url = "s1600";
+ 
  function switchTab(mode) {
 	document.querySelectorAll(".tab_gen button").forEach(btn => btn.classList.remove("active"));
  	document.querySelectorAll(".content").forEach(content => content.classList.remove("active"));
@@ -94,9 +98,7 @@ async function generate_mode_link() {
 		const article = doc.querySelector(tag_article_selector) || doc;
 		
 		article.querySelectorAll(tag_img_selector).forEach(img => {
-			
-			const imgSrc = img.getAttribute("src").replace(/s\d{2,4}(-[a-z]{1,2}\d{2,4})?/g, 's2048');
-			
+			const imgSrc = fitur_custom_regex_url_convert? img.getAttribute("src").replace(custom_regex_url_convert, ouput_url) : img.getAttribute("src");
 			if (imgSrc) {
 				_link_manga_hr.push(imgSrc);
 			}
@@ -128,7 +130,7 @@ async function generate_mode_link() {
  	const _link_manga_hr = [];
  	
  	doc.querySelectorAll("img").forEach(img => {
- 		const imgSrc = img.getAttribute("src").replace(/s\d{2,4}(-[a-z]{1,2}\d{2,4})?/g, 's2048');
+   const imgSrc = fitur_custom_regex_url_convert? img.getAttribute("src").replace(custom_regex_url_convert, ouput_url) : img.getAttribute("src");
  		if (imgSrc) {
  			_link_manga_hr.push(imgSrc);
  		}
