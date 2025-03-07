@@ -31,7 +31,7 @@ class MangaReader {
 		this.custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc = options.custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc;
 		this.resolusi_higth = options.resolusi_higth;
 		this.resolusi_low = options.resolusi_low;
-		this.custom_regexURL = options.custom_regexURL;
+		this.custom_regexURL = options._fitur_custom_regexURL && options.custom_regexURL || /s\d{4,4}/g;
 		this.dbname_setmode = "MangaReaderDB";
 		this.storename_setmode = "modes";
 		this.swiper_panel_hr = null;
