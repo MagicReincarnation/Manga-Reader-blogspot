@@ -14,7 +14,10 @@
  * Copyright (c) 2025 Hirutshuji & Roka
  * All rights reserved.
  */
-class MangaReader {
+ /* Source Code Regex 
+  * https://stackoverflow.com/questions/62802497/how-can-i-simplify-this-regular-expression-to-select-blogger-image-parameters
+ */
+ class MangaReader {
  constructor(options) {
   this.seriesId = options.seriesId;
   this.panelManga = options.pages;
@@ -318,7 +321,8 @@ document.addEventListener("contextmenu", function(event) {
   
   this.hidebox();
  }
- load_chapter_image(panelManga, startIndex = 0) {
+
+load_chapter_image(panelManga, startIndex = 0) {
   this.panelManga = panelManga;
   this.total_panelmanga = panelManga.length;
   
@@ -329,11 +333,11 @@ document.addEventListener("contextmenu", function(event) {
     const page = panelManga[index];
     
     const lowRes = this.compresResolusi ?
-       this.loadXHR(page, this.resolusi_low) :
+        this.loadXHR(page, this.resolusi_low) :
       (this.default_url || page);
      
      const highRes = this.compresResolusi ?
-       this.loadXHR(page, this.resolusi_higth) :
+        this.loadXHR(page, this.resolusi_higth) :
       page;
      
     //lazy load: gambar dimuat dengan data-src
@@ -391,7 +395,7 @@ document.addEventListener("contextmenu", function(event) {
   let slider_hr = "";
 
   this.panelManga.forEach((page, index) => {
-     const lowRes = this.compresResolusi ? this.loadXHR(page, this.resolusi_low) : (this.default_url || page);
+     const lowRes = this.compresResolusi ?  this.loadXHR(page, this.resolusi_low) : (this.default_url || page);
      const highRes = this.compresResolusi ? this.loadXHR(page, this.resolusi_higth) : page;
 
     slider_hr += `
@@ -495,7 +499,7 @@ document.addEventListener("contextmenu", function(event) {
  Resolusi gambar
  =========================================================*/
  loadXHR(url, s_resolusi) {
- return url.replace('s1600', s_resolusi ? s_resolusi : this.s_resolusi);
+ return url.replace(/s\d{2,4}(-[a-z]{1,2}\d{2,4})?/g, s_resolusi ? s_resolusi : this.s_resolusi);
 }
  /*========================================================
  Run: mini preview Manga
