@@ -38,17 +38,17 @@ MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, L
 
 0. Pasang library Swiper:
 
-1. Tambahkan di bagian <head>
+1. Tambahkan di bagian `<head>`.
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 ```
-2. Tambahkan di akhir <body>
+2. Tambahkan di atas `</body>`.
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 ```
-1. Tambahkan elemen ini di HTML:
+1. Tambahkan elemen ini di HTML (html article chapter manga):
 ```html
 <!--Buang label Chapter agar bisa mendapatkan label judul series, jika terdapat label lain masukan disini-->
  <b:with value='["Chapter"]' var='checkLabel'>
@@ -95,17 +95,19 @@ MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, L
  
  
  <div class="box_panelinfo">
-  <span id="page_panel_active_info">1/</span>
+  <span id="page_panel_active_info">1/0</span>
  </div>
  
    </b:loop>
   </b:if>
  </b:with>
 ```
-2. Tambahkan script untuk menjalankan MangaReader:
+2. Tambahkan script config di atas `</body>` untuk menjalankan MangaReader:
 
 ```javascript
-let _link_manga_hr = [ "manga1.jpg", "manga2.jpg", "manga3.jpg" ];
+ <script type="text/javascript">
+		/*<![CDATA[*/
+		let _link_manga_hr = [ "manga1.jpg", "manga2.jpg", "manga3.jpg" ];
 
 // Ambil seriesId dari data attribute
 /********** run Script MangaReader **********/
@@ -117,9 +119,9 @@ const _set_options_mode_reading = {
  lazyBatch: 1,  // lazybatch pertama kali load.
  timer_loader: 500, // timer hidden loader
  compresResolusi: true, // fitur replace sxx > resolusi_higth
- resolusi_higth: 's2048', // higth reso
+ resolusi_higth: 's1600', // higth reso
  resolusi_low: 's160', // low reso (thumb lazy)
- s_resolusi: "s2048", //default reso 
+ s_resolusi: "s1600", //default reso 
  default_url: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=", //custom img transparant lazy
  custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=",// custom img transparant mini preview lazy
  custom_regexURL: /s\d{2,4}/g, //custom regex
@@ -128,9 +130,11 @@ const _set_options_mode_reading = {
 document.addEventListener('DOMContentLoaded', () => {
       window.reader = new MangaReader(_set_options_mode_reading);
 });
+		/*]]>*/
+	</script>
 ```
 
-3. pasang Mainscriptnya. 
+3. pasang Mainscriptnya dibawah config. 
     entah dihost lewat cdn/langsung keblog.
     atau bisa pakai aja ini yang sudah dihost
     ```html 
@@ -138,6 +142,23 @@ document.addEventListener('DOMContentLoaded', () => {
     ```
 
 ---
+# Change Log 
+## Version now 3.2.0
+###  3.0.0 
+  1. rilis awal.
+
+### 3.1.0
+  1. Fixbug regex resolusi url gambar blogspot.
+  2. Mengupdate function Hidebox & zoom 
+
+### v3.2.0 
+  1. Update: mini preview tidak akan diclose saat sedang scroll.
+  2. Meningkatkan function hidebox.
+  3. Zoom sesuai titik jari.
+  4. menghapus observer kode [zoom].
+
+
+___
 
 #  Lisensi & Credit
 

@@ -132,65 +132,83 @@ class MangaReader {
 	/*========================================================
 	Hidden box Mode,info,mini preview [vertical/LTR/RTL/Longstip]
 	=========================================================*/
-	hidebox() {
+ hidebox() {
+	// Mini Preview untuk [vertical/LTR/RTL]
+	const swiper_cc_hr = document.getElementById('ltr_rtl_vertical_div_cc'),
+		swiperEl = document.querySelector('.swiper_init_divbox'),
+		longstrip_cc_hr = document.getElementById('longstrip_div_cc'),
+		cc_e_longstrip = document.getElementById('longstrip_box'),
+		
+		nextBtn = document.querySelector('.swiper-button-next'),
+		prevBtn = document.querySelector('.swiper-button-prev'),
+		boxInfo = document.querySelector('.box_panelinfo'),
+		
 		// Mini Preview untuk [vertical/LTR/RTL]
-		const swiper_cc_hr = document.getElementById('ltr_rtl_vertical_div_cc'),
-			swiperEl = document.querySelector('.swiper_init_divbox'),
-			longstrip_cc_hr = document.getElementById('longstrip_div_cc'),
-			cc_e_longstrip = document.getElementById('longstrip_box'),
-			
-			nextBtn = document.querySelector('.swiper-button-next'),
-			prevBtn = document.querySelector('.swiper-button-prev'),
-			boxInfo = document.querySelector('.box_panelinfo'),
-			
-			// Mini Preview untuk [vertical/LTR/RTL]
-			mini_preview_element = document.getElementById('mini_preview_ltr_rtl_vertical_div_cc'),
-			// Mini Preview untuk Longstrip
-			mini_preview_Longstrip_hr = document.getElementById('mini_preview_longstrip_div_cc'),
-			// Untuk box controls (btn navigation + box btn mode)
-			controls_mode_hr = document.querySelectorAll('.box_controls_mode');
-		
-		// Deteksi mode saat ini (gunakan data-mode atau class)
-		let mode_active = this._mode_reading_hr; // Default ke LTR jika tidak ada
-		
-		
-		let element_box = [boxInfo, mini_preview_element];
-		
-		// Jika mode adalah "longstrip", tambahkan mini_preview_Longstrip_hr ke dalam elements
-		if (mode_active === "longstrip") {
-			element_box.push(mini_preview_Longstrip_hr);
-		} else {
-			// Pastikan Mini Preview Longstrip disembunyikan di mode selain longstrip
-			mini_preview_Longstrip_hr.style.display = "none";
-		}
-		
-		// Sembunyikan box saat pertama kali dijalankan (kecuali nextBtn & prevBtn)
-		element_box.forEach(el => el?.style && (el.style.display = 'none'));
-		controls_mode_hr.forEach(el => el.style.display = 'none');
-		
-		let hide_timeout;
-		
-		function showbox_cc(event) {
-			// Cek apakah box yang diklik adalah nextBtn atau prevBtn
-			if (event.target === nextBtn || event.target === prevBtn) return;
-			
-			// Tampilkan elemen
-			element_box.forEach(el => el?.style && (el.style.display = 'flex'));
-			controls_mode_hr.forEach(el => el.style.display = 'flex');
-			
-			clearTimeout(hide_timeout);
-			hide_timeout = setTimeout(() => {
-				// Sembunyikan kembali setelah 3 detik
-				element_box.forEach(el => el?.style && (el.style.display = 'none'));
-				controls_mode_hr.forEach(el => el.style.display = 'none');
-			}, 3000);
-		}
-		
-		// Untuk menampilkan box saat area diklik
-		[swiperEl, cc_e_longstrip, swiper_cc_hr, longstrip_cc_hr].forEach(el => el?.addEventListener('click', showbox_cc));
-		
-		this.popupwarning();
+		mini_preview_element = document.getElementById('mini_preview_ltr_rtl_vertical_div_cc'),
+		// Mini Preview untuk Longstrip
+		mini_preview_Longstrip_hr = document.getElementById('mini_preview_longstrip_div_cc'),
+		// Untuk box controls (btn navigation + box btn mode)
+		controls_mode_hr = document.querySelectorAll('.box_controls_mode');
+	
+	// Deteksi mode saat ini
+	let mode_active = this._mode_reading_hr;
+	
+	let element_box = [boxInfo, mini_preview_element];
+	
+	// Jika mode adalah "longstrip", tambahkan mini_preview_Longstrip_hr
+	if (mode_active === "longstrip") {
+		element_box.push(mini_preview_Longstrip_hr);
+	} else {
+		// Mini Preview Longstrip disembunyikan di mode selain longstrip
+		mini_preview_Longstrip_hr.style.display = "none";
 	}
+	
+	// Sembunyikan box saat pertama kali dijalankan (kecuali nextBtn & prevBtn)
+	element_box.forEach(el => el?.style && (el.style.display = 'none'));
+	controls_mode_hr.forEach(el => el.style.display = 'none');
+	
+	let hide_timeout;
+	let time_boxshow = 5000;
+	function showbox_cc(event) {
+		// Cek apakah box yang diklik adalah nextBtn atau prevBtn
+		if (event.target === nextBtn || event.target === prevBtn) return;
+		// Tampilkan elemen
+		element_box.forEach(el => el?.style && (el.style.display = 'flex'));
+		controls_mode_hr.forEach(el => el.style.display = 'flex');
+		clearTimeout(hide_timeout);
+		hide_timeout = setTimeout(() => {
+			// Sembunyikan kembali setelah 5 detik (jika tidak sedang scroll)
+			hidebox_cc();
+		}, time_boxshow);
+	}
+	
+	
+	function hidebox_cc() {
+  	element_box.forEach(el => el?.style && (el.style.display = 'none'));
+	controls_mode_hr.forEach(el => el.style.display = 'none');
+	}
+	
+	function reset_hidebox() {
+		clearTimeout(hide_timeout);
+		hide_timeout = setTimeout(() => {
+			// Sembunyikan kembali setelah 3 detik (jika tidak sedang scroll)
+			hidebox_cc();
+		}, 3000);
+	}
+	
+	// Menampilka box saat area diklik
+[swiperEl, cc_e_longstrip, swiper_cc_hr, longstrip_cc_hr].forEach(el => {
+	el?.addEventListener('click', (event) => {0
+			showbox_cc(event);
+	});
+});
+	
+	// Mencegah penutupan saat scroll pada preview
+	mini_preview_element?.addEventListener('scroll', reset_hidebox);
+	mini_preview_Longstrip_hr?.addEventListener('scroll', reset_hidebox);
+	
+	this.popupwarning();
+}
 	popupwarning() {
 		// ccs/div popup ke dalam body
 		let popupWarning = document.createElement("div");
@@ -303,6 +321,10 @@ class MangaReader {
 		this.swiper_panel_hr = new Swiper('.swiper_init_divbox', {
 			direction: (this._mode_reading_hr === 'vertical') ? 'vertical' : 'horizontal',
 			loop: false,
+			allowTouchMove: true,
+			slideToClickedSlide: true,
+	  preventClicksPropagation: false,
+	  preventClicks: false,
 			navigation: {
 				nextEl: '.swiper-button-next',
 				prevEl: '.swiper-button-prev',
@@ -329,7 +351,15 @@ class MangaReader {
 		
 		if (this.swiper_panel_hr) {
 			this.swiper_panel_hr.removeAllSlides();
-			
+						// **panel pertama khusus**
+			this.swiper_panel_hr.appendSlide(`
+            <div class="swiper-slide end-panel">
+                <div class="manga-page">
+                <img  alt="Manga banner page" src="https://64.media.tumblr.com/fe5de7eaa145e2856a1c50d0c49a330e/6f1e23be289c9913-19/s540x810/b23a0b928a86d2b23f7cc1191e6991907c166cb3.gif">
+                </div>
+            </div>
+        `);
+        
 			for (let index = 0; index < panelManga.length; index++) {
 				const page = panelManga[index];
 				const regex = this.custom_regexURL;
@@ -388,6 +418,8 @@ class MangaReader {
 		this.update_pageOf_panelManga();
 		this._update_mini_preview_active();
 		this._run_LazyLoad();
+  // v2.1: Support Zoom sesuai titik tap. 
+  document.querySelectorAll(".manga-page img").forEach(img => run_TachiyomiZoom(img));
 	}
 	
 	/*========================================================
@@ -397,6 +429,12 @@ class MangaReader {
 		const cc_e_longstrip = document.getElementById('longstrip_box');
 		let slider_hr = "";
 		
+		slider_hr +=`<div class="longstrip-slide start-panel">
+            <div class="manga-page">
+            <img  alt="Manga banner page" src="https://64.media.tumblr.com/fe5de7eaa145e2856a1c50d0c49a330e/6f1e23be289c9913-19/s540x810/b23a0b928a86d2b23f7cc1191e6991907c166cb3.gif">
+                </div>
+            </div>`;
+            
 		this.panelManga.forEach((page, index) => {
 			const regex = this.custom_regexURL;
 			const lowRes = this.compresResolusi && regex.test(page) ?
@@ -467,6 +505,8 @@ class MangaReader {
 		
 		this.update_pageOf_panelManga();
 		this._update_mini_preview_active();
+  // khusus longstrip
+  run_pinch_SizeMargin();
 	}
 	
 	_longstripScroll(panel_entry) {
@@ -709,8 +749,14 @@ function _mini_preview_panel_hr() {
 /********** 
  * SETUP Zoom in/out v2 
  * by Roka 
+ * Keunggulan Perubahan Ini:
+ * ✔ Zoom sesuai titik tap. 
+ * ✔ Lebih smooth & responsif. 
+ * ✔ Drag bisa dilakukan saat zoom aktif.
+ * ✔ Mendukung pinch zoom dengan dua jari.
+ * ✔ Tidak perlu obbserver lagi.
  **********/
-function run_TachiyomiZoom(img) {
+ function run_TachiyomiZoom(img) {
 	let scale = 1,
 		lastScale = 1,
 		isDragging = false,
@@ -718,21 +764,27 @@ function run_TachiyomiZoom(img) {
 		translateX = 0,
 		translateY = 0,
 		lastTouchTime = 0,
-		isDoubleTap = false,
-		originX = 0,
-		originY = 0;
+		originX = 50,
+		originY = 50;
 	
 	let container = img.closest(".manga-page");
+	
 	// **Double Tap Zoom**
 	img.addEventListener("touchend", (e) => {
 		let now = new Date().getTime();
 		if (now - lastTouchTime < 300) {
-			isDoubleTap = true;
+			e.preventDefault();
+			let rect = img.getBoundingClientRect();
+			let touch = e.changedTouches[0];
+			
+			// **Hitung posisi klik jari terhadap gambar**
+			originX = ((touch.clientX - rect.left) / rect.width) * 100;
+			originY = ((touch.clientY - rect.top) / rect.height) * 100;
+			
 			scale = scale > 1 ? 1 : 2.5;
 			translateX = 0;
 			translateY = 0;
-			originX = 50;
-			originY = 50;
+			
 			img.style.transition = "transform 0.3s ease";
 			img.style.transformOrigin = `${originX}% ${originY}%`;
 			img.style.transform = `scale(${scale}) translate(0px, 0px)`;
@@ -790,7 +842,7 @@ function run_TachiyomiZoom(img) {
 		img.style.cursor = "grab";
 	});
 	
-	// **Fungsi untuk mendapatkan jarak antara dua jari**
+	// **untuk mendapatkan jarak antara dua jari**
 	function getDistance(touch1, touch2) {
 		let dx = touch2.clientX - touch1.clientX;
 		let dy = touch2.clientY - touch1.clientY;
@@ -804,33 +856,10 @@ function run_TachiyomiZoom(img) {
 	}
 }
 
-const observer = new MutationObserver((mutations) => {
-	mutations.forEach((mutation) => {
-		mutation.addedNodes.forEach((node) => {
-			if (node.nodeType === 1) {
-				let images = node.querySelectorAll(".manga-page img");
-				images.forEach((img) => {
-					if (!img.dataset.zoomInitialized) {
-						img.dataset.zoomInitialized = "true";
-						run_TachiyomiZoom(img);
-					}
-				});
-			}
-		});
-	});
-});
-const targetNode = document.querySelector(".swiper-wrapper");
-if (targetNode) {
-	observer.observe(targetNode, { childList: true, subtree: true });
-}
-document.querySelectorAll(".manga-page img").forEach(img => run_TachiyomiZoom(img));
-
-
-
-
 /********** 
  * SETUP Zoom in/out v2 untuk longstrip
  * by roka 
+ * ✔ Mendukung pinch zoom dengan dua jari.
  **********/
 function run_pinch_SizeMargin() {
 	const containerLongStrip = document.querySelector('.longstrip_box');
@@ -857,7 +886,7 @@ function run_pinch_SizeMargin() {
 			startMarginLeft = parseFloat(getComputedStyle(containerLongStrip).marginLeft) || 0;
 			startMarginRight = parseFloat(getComputedStyle(containerLongStrip).marginRight) || 0;
 		} else if (e.touches.length === 1) {
-			// **Mulai geser dengan satu jari jika salah satu margin <= -30px**
+			// **Mulai geser dengan satu jari jika salah satu margin <= -20px MIN_MARGIN_THRESHOLD**
 			isPinching = false;
 			startX = e.touches[0].clientX;
 			startMarginLeft = parseFloat(getComputedStyle(containerLongStrip).marginLeft) || 0;
@@ -886,7 +915,7 @@ function run_pinch_SizeMargin() {
 			let newMarginLeft = startMarginLeft + moveX * 0.6;
 			let newMarginRight = startMarginRight - moveX * 0.6;
 			
-			// **Pastikan margin tetap berlawanan**
+			// **margin tetap berlawanan**
 			if (newMarginLeft > 0 && newMarginRight < 0) {
 				newMarginLeft = Math.max(0, newMarginLeft);
 				newMarginRight = Math.min(0, newMarginRight);
@@ -922,8 +951,6 @@ function run_pinch_SizeMargin() {
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 }
-
-document.addEventListener('DOMContentLoaded', run_pinch_SizeMargin);
 
 /************************************************************
  * Btn Mode Reader
