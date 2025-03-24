@@ -902,7 +902,7 @@ if (reverse_swipe_nextprev) {
 				if (this._mode_reading_hr === 'longstrip') {
 					this._scrollToLongstrip(idx);
 				} else if (this.swiper_panel_hr) {
-					this.swiper_panel_hr.slideTo(idx, 300);
+					this.swiper_panel_hr.slideTo(idx + 1, 300);
 				}
 				
 				this._update_mini_preview_active();
