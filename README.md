@@ -3,7 +3,7 @@
 MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, LTR, dan vertikal. Fitur ini juga mendukung zoom, swipe, dan mini preview untuk navigasi yang lebih mudah.
 
 # Demo 
-  * Link v3.2: [Video](https://youtu.be/YvrSovTGqgg?si=s4_Y7WUmfRfpKAFj)
+  * Link v3.3: [Video](https://youtu.be/YvrSovTGqgg?si=s4_Y7WUmfRfpKAFj)
   * Live Demo: [Manga Reader](https://magicreincarnation.github.io/Manga-Reader-blogspot/)
   * Generator Link: [Generator converter](https://magicreincarnation.github.io/Manga-Reader-blogspot/Generator%20link/Generator.html)
 ---
