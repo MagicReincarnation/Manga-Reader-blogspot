@@ -27,10 +27,10 @@ class MangaReader {
 		this.lazyload_bacth = options.lazyBatch || 3;
 		this.timer_loader = options.timer_loader || 500;
 		this.timer_auto_Hidebox = options.timer_auto_Hidebox || 3000;
-	 this.reverse_swipe_nextprev = options.reverse_swipe_nextprev || false;
-	 this.use_click_screen = options.use_click_screen || true;
-	 this.arr = [];
-	 this.show_nextPrev = options.show_nextPrev || false;
+		this.reverse_swipe_nextprev = options.reverse_swipe_nextprev || false;
+		this.use_click_screen = options.use_click_screen || true;
+		this.arr = [];
+		this.show_nextPrev = options.show_nextPrev || false;
 		this.config = Object.assign({
 			max: 150,
 			start: 1,
@@ -39,7 +39,7 @@ class MangaReader {
 			classSelector: ".mode_manga_reader",
 			textError: "Error",
 		}, options.configNextprev || {});
-  this.s_resolusi = options.s_resolusi || "s1600";
+		this.s_resolusi = options.s_resolusi || "s1600";
 		this.compresResolusi = options.compresResolusi || true;
 		this.default_url = options.default_url || 'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=';
 		this.custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc = options.custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc || 'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=';
@@ -119,27 +119,27 @@ Auto Next Prev Link Chapter
 		return data.sort((a, b) => a.title.localeCompare(b.title, undefined, { numeric: true }));
 	}
 	compile() {
-	if (!this.arr.length) {
-		console.error("[DEBUG] Data array kosong");
-		return;
-	}
-	const sortedData = this.sortData(this.arr).reverse();
-	const currentURL = location.href;
-	sortedData.forEach((item, index) => {
-		if (currentURL.includes(item.url)) {
-			const prevItem = sortedData[index + 1];
-			const nextItem = sortedData[index - 1];
-			const prevUrl = (prevItem && !prevItem.cat.includes(this.config.labelMain)) ? prevItem.url : "";
-			const nextUrl = (nextItem && !nextItem.cat.includes(this.config.labelMain)) ? nextItem.url : "";
-		
-			const startPanel = document.querySelector('.startpanel_message');
-			const endPanel = document.querySelector('.endpanel_message');
-			
-			// Inject Pesan ke .startpanel_message
-			if (startPanel) {
-				  startPanel.innerHTML = "";
-				if (prevUrl) {
-					startPanel.innerHTML = `
+		if (!this.arr.length) {
+			console.error("[DEBUG] Data array kosong");
+			return;
+		}
+		const sortedData = this.sortData(this.arr).reverse();
+		const currentURL = location.href;
+		sortedData.forEach((item, index) => {
+			if (currentURL.includes(item.url)) {
+				const prevItem = sortedData[index + 1];
+				const nextItem = sortedData[index - 1];
+				const prevUrl = (prevItem && !prevItem.cat.includes(this.config.labelMain)) ? prevItem.url : "";
+				const nextUrl = (nextItem && !nextItem.cat.includes(this.config.labelMain)) ? nextItem.url : "";
+				
+				const startPanel = document.querySelector('.startpanel_message');
+				const endPanel = document.querySelector('.endpanel_message');
+				
+				// Inject Pesan ke .startpanel_message
+				if (startPanel) {
+					startPanel.innerHTML = "";
+					if (prevUrl) {
+						startPanel.innerHTML = `
                     <span class="boxsc">
                     <span class="status">Sebelumnya:</span> <a rel="prevCh" href="${prevUrl}">
                     <span class="ch">
@@ -153,21 +153,21 @@ Auto Next Prev Link Chapter
                     </span>
                     <span class="info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 17h2v-6h-2zm1-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg> ${this._mode_reading_hr === "rtl"? "Mode RTL Active (swipe ke kanan)" : (this._mode_reading_hr ==="ltr"? "Mode LTR Active (swipe ke kiri)" : (this._mode_reading_hr === "vertical"? "Mode Vertical Active (swipe ke keatas)" : "Mode Longstrip Active (Scroll ke atas)"))}</span>
                     `;
-				} else {
-					startPanel.innerHTML = `
+					} else {
+						startPanel.innerHTML = `
                     <span class="info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 17h2v-6h-2zm1-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg> Tidak ada bab sebelumnya</span>
                     <span class="boxsc">
                     <span class="status">Saat ini:</span>
                     <span class="ch">${item.title}</span>
                     </span>
                     <span class="info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 17h2v-6h-2zm1-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg> ${this._mode_reading_hr === "rtl"? "Mode RTL Active (swipe ke kanan)" : (this._mode_reading_hr ==="ltr"? "Mode LTR Active (swipe ke kiri)" : (this._mode_reading_hr === "vertical"? "Mode Vertical Active (swipe ke keatas)" : "Mode Longstrip Active (Scroll ke atas)"))}</span>`;
-				 }
-			}
-			// Inject Pesan ke .endpanel_message
-			if (endPanel) {
-				endPanel.innerHTML = "";
-				if (nextUrl) {
-					endPanel.innerHTML = `
+					}
+				}
+				// Inject Pesan ke .endpanel_message
+				if (endPanel) {
+					endPanel.innerHTML = "";
+					if (nextUrl) {
+						endPanel.innerHTML = `
 																				<span class="boxsc">
                     <span class="status">Selesai:</span>
                     <span class="ch">${item.title}</span>
@@ -181,46 +181,46 @@ Auto Next Prev Link Chapter
                     </span></a>
                     </span>
                     `;
-				} else {
-					endPanel.innerHTML = `
+					} else {
+						endPanel.innerHTML = `
 																				<span class="boxsc">
                     <span class="status">Selesai:</span>
                     <span class="ch">${item.title}</span>
                     </span> 
                     <span class="info"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 17h2v-6h-2zm1-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg> Tidak ada bab Selanjutnya </span>`;
+					}
 				}
 			}
-		}
-	});
-}
-
-	xhr() {
-	const { site, cat, start, max, textError } = this.config;
-	// Konversi label menjadi URL-friendly format
-	const labelUrl = encodeURIComponent(cat); // Jika ingin pakai "-" gunakan: cat.replace(/\s+/g, "-");
-	const url = `${site}/feeds/posts/summary/-/${labelUrl}?alt=json&start-index=${start}&max-results=${max}`;
-	if (site && new URL(site).origin !== location.origin) {
- 	const callbackName = this._create_callback();
-		const script = document.createElement("script");
-		script.src = `${url}&callback=${callbackName}`;
-		script.onerror = () => this.showError(textError);
-		document.body.appendChild(script);
-	} else {
-		const request = new XMLHttpRequest();
-		request.open("GET", url, true);
-		request.onreadystatechange = () => {
-			if (request.readyState === 4) {
-				if (request.status === 200) {
-					const response = JSON.parse(request.responseText);
-					this.respon_data(response);
-				} else {
-					this.showError(textError);
-				}
-			}
-		};
-		request.send();
+		});
 	}
-}
+	
+	xhr() {
+		const { site, cat, start, max, textError } = this.config;
+		// Konversi label menjadi URL-friendly format
+		const labelUrl = encodeURIComponent(cat); // Jika ingin pakai "-" gunakan: cat.replace(/\s+/g, "-");
+		const url = `${site}/feeds/posts/summary/-/${labelUrl}?alt=json&start-index=${start}&max-results=${max}`;
+		if (site && new URL(site).origin !== location.origin) {
+			const callbackName = this._create_callback();
+			const script = document.createElement("script");
+			script.src = `${url}&callback=${callbackName}`;
+			script.onerror = () => this.showError(textError);
+			document.body.appendChild(script);
+		} else {
+			const request = new XMLHttpRequest();
+			request.open("GET", url, true);
+			request.onreadystatechange = () => {
+				if (request.readyState === 4) {
+					if (request.status === 200) {
+						const response = JSON.parse(request.responseText);
+						this.respon_data(response);
+					} else {
+						this.showError(textError);
+					}
+				}
+			};
+			request.send();
+		}
+	}
 	
 	_create_callback() {
 		const callbackName = `callback_${Math.random().toString(36).substr(2, 9)}`;
@@ -241,7 +241,7 @@ Auto Next Prev Link Chapter
 					cat: entry.category.map(category => category.term)
 				});
 			});
-
+			
 			if (feed.entry.length >= this.config.max) {
 				this.config.start += this.config.max;
 				this.xhr();
@@ -260,19 +260,19 @@ Auto Next Prev Link Chapter
 		const errorElem2 = document.querySelector('.endpanel_message');
 		if (errorElem) errorElem.innerHTML = `<span class="info"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 17h2v-6h-2zm1-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg> Tidak ada bab Sebelumnya (${message}) </span> <span class="info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 17h2v-6h-2zm1-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg> ${this._mode_reading_hr === "rtl"? "Mode RTL Active (swipe ke kanan)" : (this._mode_reading_hr ==="ltr"? "Mode LTR Active (swipe ke kiri)" : (this._mode_reading_hr === "vertical"? "Mode Vertical Active (swipe ke keatas)" : "Mode Longstrip Active (Scroll ke atas)"))}</span>`;
 		
-		if(errorElem2) errorElem2.innerHTML = `<span class="info"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 17h2v-6h-2zm1-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg> Tidak ada bab Selanjutnya (${message}) </span>`;
+		if (errorElem2) errorElem2.innerHTML = `<span class="info"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11 17h2v-6h-2zm1-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg> Tidak ada bab Selanjutnya (${message}) </span>`;
 	}
 	
 	run() {
 		if (this.show_nextPrev) {
-		const container = document.querySelector(this.config.classSelector);
-		if (!container) return console.error("[DEBUG] Elemen tidak ditemukan.");
-		
-		const label = container.getAttribute("data-label");
-		if (!label) return console.error("[DEBUG] Label tidak ditemukan.");
-		
-		this.config.cat = label;
-		this.xhr();
+			const container = document.querySelector(this.config.classSelector);
+			if (!container) return console.error("[DEBUG] Elemen tidak ditemukan.");
+			
+			const label = container.getAttribute("data-label");
+			if (!label) return console.error("[DEBUG] Label tidak ditemukan.");
+			
+			this.config.cat = label;
+			this.xhr();
 		}
 	}
 	/*========================================================
@@ -311,105 +311,105 @@ Auto Next Prev Link Chapter
 	 * Auto Hide 3s
 	=========================================================*/
 	hidebox() {
-	// Mini Preview untuk [vertical/LTR/RTL]
-	const swiper_cc_hr = document.getElementById('ltr_rtl_vertical_div_cc'),
-		swiperEl = document.querySelector('.swiper_init_divbox'),
-		longstrip_cc_hr = document.getElementById('longstrip_div_cc'),
-		cc_e_longstrip = document.getElementById('longstrip_box'),
-		
-		nextBtn = document.querySelector('.swiper-button-next'),
-		prevBtn = document.querySelector('.swiper-button-prev'),
-		boxInfo = document.querySelector('.box_panelinfo'),
-		
 		// Mini Preview untuk [vertical/LTR/RTL]
-		mini_preview_element = document.getElementById('mini_preview_ltr_rtl_vertical_div_cc'),
-		// Mini Preview untuk Longstrip
-		mini_preview_Longstrip_hr = document.getElementById('mini_preview_longstrip_div_cc'),
-		// Untuk box controls (btn navigation + box btn mode)
-		controls_mode_hr = document.querySelectorAll('.box_controls_mode');
-	
-	// Deteksi mode saat ini
-	let mode_active = this._mode_reading_hr;
-	
-	let element_box = [boxInfo, mini_preview_element];
-	
-	// Jika mode adalah "longstrip", tambahkan mini_preview_Longstrip_hr
-	if (mode_active === "longstrip") {
-		element_box.push(mini_preview_Longstrip_hr);
-	} else {
-		// Mini Preview Longstrip disembunyikan di mode selain longstrip
-		mini_preview_Longstrip_hr.style.display = "none";
-	}
-	
-	// Sembunyikan box saat pertama kali dijalankan (kecuali nextBtn & prevBtn)
-	element_box.forEach(el => el?.style && (el.style.display = 'none'));
-	controls_mode_hr.forEach(el => el.style.display = 'none');
-	
-	let _is_box_displayed = false;
-	let hide_timeout;
-	let time_boxshow = this.timer_auto_Hidebox;
-	let run_clicker = true; // Cegah clicker terlalu cepat setelah showbox_cc()
-	
-	function showbox_cc() {
-		if (!run_clicker) return; // Jika belum bisa clicker, hentikan function ini.
+		const swiper_cc_hr = document.getElementById('ltr_rtl_vertical_div_cc'),
+			swiperEl = document.querySelector('.swiper_init_divbox'),
+			longstrip_cc_hr = document.getElementById('longstrip_div_cc'),
+			cc_e_longstrip = document.getElementById('longstrip_box'),
+			
+			nextBtn = document.querySelector('.swiper-button-next'),
+			prevBtn = document.querySelector('.swiper-button-prev'),
+			boxInfo = document.querySelector('.box_panelinfo'),
+			
+			// Mini Preview untuk [vertical/LTR/RTL]
+			mini_preview_element = document.getElementById('mini_preview_ltr_rtl_vertical_div_cc'),
+			// Mini Preview untuk Longstrip
+			mini_preview_Longstrip_hr = document.getElementById('mini_preview_longstrip_div_cc'),
+			// Untuk box controls (btn navigation + box btn mode)
+			controls_mode_hr = document.querySelectorAll('.box_controls_mode');
 		
-		element_box.forEach(el => el?.style && (el.style.display = 'flex'));
-		controls_mode_hr.forEach(el => el.style.display = 'flex');
-		_is_box_displayed = true;
+		// Deteksi mode saat ini
+		let mode_active = this._mode_reading_hr;
 		
-		clearTimeout(hide_timeout);
-		hide_timeout = setTimeout(() => hidebox_cc(), time_boxshow);
+		let element_box = [boxInfo, mini_preview_element];
 		
-		run_clicker = false;
-		setTimeout(() => run_clicker = true, 300); // Jeda 300ms sebelum clicker bisa dilakukan lagi
-	}
-	
-	function hidebox_cc() {
-		if (!run_clicker) return; // Jika belum bisa clicker, hentikan fungsi
+		// Jika mode adalah "longstrip", tambahkan mini_preview_Longstrip_hr
+		if (mode_active === "longstrip") {
+			element_box.push(mini_preview_Longstrip_hr);
+		} else {
+			// Mini Preview Longstrip disembunyikan di mode selain longstrip
+			mini_preview_Longstrip_hr.style.display = "none";
+		}
 		
+		// Sembunyikan box saat pertama kali dijalankan (kecuali nextBtn & prevBtn)
 		element_box.forEach(el => el?.style && (el.style.display = 'none'));
 		controls_mode_hr.forEach(el => el.style.display = 'none');
-		_is_box_displayed = false;
-	}
-	
-	function reset_hidebox() {
-		clearTimeout(hide_timeout);
-		hide_timeout = setTimeout(() => hidebox_cc(), 3000);
-	}
-	
-	function clicker_display(event) {
-		// Cegah jika yang diklik adalah btn next prev
-		if (event.target === nextBtn || event.target === prevBtn) return;
 		
-		const rect = event.target.getBoundingClientRect();
-		const clickX = event.clientX - rect.left;
-		const width = rect.width;
+		let _is_box_displayed = false;
+		let hide_timeout;
+		let time_boxshow = this.timer_auto_Hidebox;
+		let run_clicker = true; // Cegah clicker terlalu cepat setelah showbox_cc()
 		
-		// Hitung area klik (25% kiri, 25% kanan, 50% tengah)
-		const leftArea = width * 0.25;
-		const rightArea = width * 0.75;
+		function showbox_cc() {
+			if (!run_clicker) return; // Jika belum bisa clicker, hentikan function ini.
+			
+			element_box.forEach(el => el?.style && (el.style.display = 'flex'));
+			controls_mode_hr.forEach(el => el.style.display = 'flex');
+			_is_box_displayed = true;
+			
+			clearTimeout(hide_timeout);
+			hide_timeout = setTimeout(() => hidebox_cc(), time_boxshow);
+			
+			run_clicker = false;
+			setTimeout(() => run_clicker = true, 300); // Jeda 300ms sebelum clicker bisa dilakukan lagi
+		}
 		
-		// run clicker jika klik di area tengah
-		if (clickX > leftArea && clickX < rightArea) {
-			if (_is_box_displayed) {
-				hidebox_cc();
-			} else {
-				showbox_cc();
+		function hidebox_cc() {
+			if (!run_clicker) return; // Jika belum bisa clicker, hentikan fungsi
+			
+			element_box.forEach(el => el?.style && (el.style.display = 'none'));
+			controls_mode_hr.forEach(el => el.style.display = 'none');
+			_is_box_displayed = false;
+		}
+		
+		function reset_hidebox() {
+			clearTimeout(hide_timeout);
+			hide_timeout = setTimeout(() => hidebox_cc(), 3000);
+		}
+		
+		function clicker_display(event) {
+			// Cegah jika yang diklik adalah btn next prev
+			if (event.target === nextBtn || event.target === prevBtn) return;
+			
+			const rect = event.target.getBoundingClientRect();
+			const clickX = event.clientX - rect.left;
+			const width = rect.width;
+			
+			// Hitung area klik (25% kiri, 25% kanan, 50% tengah)
+			const leftArea = width * 0.25;
+			const rightArea = width * 0.75;
+			
+			// run clicker jika klik di area tengah
+			if (clickX > leftArea && clickX < rightArea) {
+				if (_is_box_displayed) {
+					hidebox_cc();
+				} else {
+					showbox_cc();
+				}
 			}
 		}
+		
+		// Menampilkan box saat klik area tertentu
+		[swiperEl, cc_e_longstrip].forEach(el => {
+			el?.addEventListener('click', clicker_display);
+		});
+		
+		// Cegah close saat scroll pada preview
+		mini_preview_element?.addEventListener('scroll', reset_hidebox);
+		mini_preview_Longstrip_hr?.addEventListener('scroll', reset_hidebox);
+		
+		this.popupwarning();
 	}
-	
-	// Menampilkan box saat klik area tertentu
-	[swiperEl, cc_e_longstrip].forEach(el => {
-		el?.addEventListener('click', clicker_display);
-	});
-	
-	// Cegah close saat scroll pada preview
-	mini_preview_element?.addEventListener('scroll', reset_hidebox);
-	mini_preview_Longstrip_hr?.addEventListener('scroll', reset_hidebox);
-	
-	this.popupwarning();
-}
 	popupwarning() {
 		// ccs/div popup ke dalam body
 		let popupWarning = document.createElement("div");
@@ -504,104 +504,104 @@ Auto Next Prev Link Chapter
 	/*========================================================
 	Run Mode [vertical/LTR/RTL]=========================================================*/
 	run_swiperlibary() {
-	if (this.swiper_panel_hr) {
-		this.swiper_panel_hr.destroy(true, true);
-		this.swiper_panel_hr = null;
-	}
-	
-	const swiperEl = document.querySelector('.swiper_init_divbox');
-	const btnNext = document.querySelector('.swiper-button-next');
-	const btnPrev = document.querySelector('.swiper-button-prev');
-	
-	// Untuk mode RTL, set attribute dir pada container swiper
-	if (this._mode_reading_hr === 'rtl') {
-		swiperEl.setAttribute('dir', 'rtl');
-	} else {
-		swiperEl.removeAttribute('dir');
-	}
-	
-	// Pengaturan Apakah Menggunakan Klik Layar
-	const use_click_screen = this.use_click_screen;
-
- let reverse_swipe_nextprev = this.reverse_swipe_nextprev;
-
-if (reverse_swipe_nextprev) {
-	if (this._mode_reading_hr === 'ltr' || this._mode_reading_hr === 'vertical') {
-		reverse_swipe_nextprev = true;
- 	} else if (this._mode_reading_hr === 'rtl') {
-		reverse_swipe_nextprev = false;
-	 }
-  }else {
-	if (this._mode_reading_hr === 'ltr' || this._mode_reading_hr === 'vertical') {
-	   reverse_swipe_nextprev = false;
-	 } else if (this._mode_reading_hr === 'rtl') {
-		 reverse_swipe_nextprev = true;
- 	}
-}
-
-	// Tampilkan atau Sembunyikan Tombol Next & Prev
-	if (use_click_screen) {
-		if (btnNext) btnNext.style.display = 'none';
-		if (btnPrev) btnPrev.style.display = 'none';
-	} else {
-		if (btnNext) btnNext.style.display = 'block';
-		if (btnPrev) btnPrev.style.display = 'block';
-	}
-	
-	// run Swiper
-	this.swiper_panel_hr = new Swiper('.swiper_init_divbox', {
-		direction: (this._mode_reading_hr === 'vertical') ? 'vertical' : 'horizontal',
-		loop: false,
-		allowTouchMove: true,
-		slideToClickedSlide: true,
-		preventClicksPropagation: false,
-		preventClicks: false,
-		navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
-		},
-		keyboard: {
-			enabled: true,
-			onlyInViewport: true,
-		},
-		on: {
-			slideChange: () => {
-				this.active_panel_read = this.swiper_panel_hr.activeIndex;
-				this.update_pageOf_panelManga();
-				this._update_mini_preview_active();
-			},
-		},
-	});
-	
-	if (use_click_screen) {
-		let status_dbclick = false;
-		let dbclick_timer = null;
+		if (this.swiper_panel_hr) {
+			this.swiper_panel_hr.destroy(true, true);
+			this.swiper_panel_hr = null;
+		}
 		
-		swiperEl.addEventListener('click', (e) => {
-			if (status_dbclick) return; // Jika dblclick terdeteksi, abaikan klik biasa
-			
-			const swiperWidth = swiperEl.clientWidth;
-			const clickX = e.clientX;
-			
-			if (clickX <= swiperWidth * 0.2) {
-				reverse_swipe_nextprev ? this.swiper_panel_hr.slideNext() : this.swiper_panel_hr.slidePrev();
-			} else if (clickX >= swiperWidth * 0.8) {
-				reverse_swipe_nextprev ? this.swiper_panel_hr.slidePrev() : this.swiper_panel_hr.slideNext();
+		const swiperEl = document.querySelector('.swiper_init_divbox');
+		const btnNext = document.querySelector('.swiper-button-next');
+		const btnPrev = document.querySelector('.swiper-button-prev');
+		
+		// Untuk mode RTL, set attribute dir pada container swiper
+		if (this._mode_reading_hr === 'rtl') {
+			swiperEl.setAttribute('dir', 'rtl');
+		} else {
+			swiperEl.removeAttribute('dir');
+		}
+		
+		// Pengaturan Apakah Menggunakan Klik Layar
+		const use_click_screen = this.use_click_screen;
+		
+		let reverse_swipe_nextprev = this.reverse_swipe_nextprev;
+		
+		if (reverse_swipe_nextprev) {
+			if (this._mode_reading_hr === 'ltr' || this._mode_reading_hr === 'vertical') {
+				reverse_swipe_nextprev = true;
+			} else if (this._mode_reading_hr === 'rtl') {
+				reverse_swipe_nextprev = false;
 			}
+		} else {
+			if (this._mode_reading_hr === 'ltr' || this._mode_reading_hr === 'vertical') {
+				reverse_swipe_nextprev = false;
+			} else if (this._mode_reading_hr === 'rtl') {
+				reverse_swipe_nextprev = true;
+			}
+		}
+		
+		// Tampilkan atau Sembunyikan Tombol Next & Prev
+		if (use_click_screen) {
+			if (btnNext) btnNext.style.display = 'none';
+			if (btnPrev) btnPrev.style.display = 'none';
+		} else {
+			if (btnNext) btnNext.style.display = 'block';
+			if (btnPrev) btnPrev.style.display = 'block';
+		}
+		
+		// run Swiper
+		this.swiper_panel_hr = new Swiper('.swiper_init_divbox', {
+			direction: (this._mode_reading_hr === 'vertical') ? 'vertical' : 'horizontal',
+			loop: false,
+			allowTouchMove: true,
+			slideToClickedSlide: true,
+			preventClicksPropagation: false,
+			preventClicks: false,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+			keyboard: {
+				enabled: true,
+				onlyInViewport: true,
+			},
+			on: {
+				slideChange: () => {
+					this.active_panel_read = this.swiper_panel_hr.activeIndex;
+					this.update_pageOf_panelManga();
+					this._update_mini_preview_active();
+				},
+			},
 		});
 		
-		swiperEl.addEventListener('dblclick', (e) => {
-			status_dbclick = true; 
-			e.stopPropagation();
-			if (dbclick_timer) clearTimeout(dbclick_timer);
-			dbclick_timer = setTimeout(() => {
-				status_dbclick = false;
-			}, 300);
-		});
+		if (use_click_screen) {
+			let status_dbclick = false;
+			let dbclick_timer = null;
+			
+			swiperEl.addEventListener('click', (e) => {
+				if (status_dbclick) return; // Jika dblclick terdeteksi, abaikan klik biasa
+				
+				const swiperWidth = swiperEl.clientWidth;
+				const clickX = e.clientX;
+				
+				if (clickX <= swiperWidth * 0.2) {
+					reverse_swipe_nextprev ? this.swiper_panel_hr.slideNext() : this.swiper_panel_hr.slidePrev();
+				} else if (clickX >= swiperWidth * 0.8) {
+					reverse_swipe_nextprev ? this.swiper_panel_hr.slidePrev() : this.swiper_panel_hr.slideNext();
+				}
+			});
+			
+			swiperEl.addEventListener('dblclick', (e) => {
+				status_dbclick = true;
+				e.stopPropagation();
+				if (dbclick_timer) clearTimeout(dbclick_timer);
+				dbclick_timer = setTimeout(() => {
+					status_dbclick = false;
+				}, 300);
+			});
+		}
+		this.hidebox();
 	}
-	this.hidebox();
-}
-
+	
 	load_chapter_image(panelManga, startIndex = 0) {
 		this.panelManga = panelManga;
 		this.total_panelmanga = panelManga.length;
@@ -618,7 +618,7 @@ if (reverse_swipe_nextprev) {
 															</div>
             </div>
         `);
-        
+			
 			for (let index = 0; index < panelManga.length; index++) {
 				const page = panelManga[index];
 				const regex = this.custom_regexURL;
@@ -677,8 +677,8 @@ if (reverse_swipe_nextprev) {
 		this._update_mini_preview_active();
 		this._run_LazyLoad();
 		this.run();
-  // v2.1: Support Zoom sesuai titik tap. 
-  document.querySelectorAll(".manga-page img").forEach(img => this.run_TachiyomiZoom(img));
+		// v2.1: Support Zoom sesuai titik tap. 
+		document.querySelectorAll(".manga-page img").forEach(img => this.run_TachiyomiZoom(img));
 	}
 	
 	/*========================================================
@@ -687,9 +687,9 @@ if (reverse_swipe_nextprev) {
 	run_longstrip_mode() {
 		const cc_e_longstrip = document.getElementById('longstrip_box');
 		let slider_hr = "";
-	
-			// * panel pertama khusus
-			slider_hr +=` 
+		
+		// * panel pertama khusus
+		slider_hr += ` 
             <div class="swiper-slide start-panel">
                 <div class="manga-page start-message">
                     <div class="boxmessage startpanel_message">
@@ -698,7 +698,7 @@ if (reverse_swipe_nextprev) {
 															</div>
             </div>
         `;
-        
+		
 		this.panelManga.forEach((page, index) => {
 			const regex = this.custom_regexURL;
 			const lowRes = this.compresResolusi && regex.test(page) ?
@@ -738,67 +738,67 @@ if (reverse_swipe_nextprev) {
 		this.total_panelmanga = this.panelManga.length;
 		this.hidebox();
 		this.run();
-  // khusus longstrip
-  this._runLongstripScroll();
-  this.run_pinch_SizeMargin();
-  this.run_IntersectionObserver();
-  
+		// khusus longstrip
+		this._runLongstripScroll();
+		this.run_pinch_SizeMargin();
+		this.run_IntersectionObserver();
+		
 	}
 	
 	run_IntersectionObserver() {
-	if (this.observer) this.observer.disconnect();
-	if (this.resizeObserver) this.resizeObserver.disconnect();
-	
-	const self = this;
-	const middleViewport = window.innerHeight / 2;
-	let lastValidIndex = 0;
-	
-	this.observer = new IntersectionObserver((panel_entry) => {
-		let index_panel_active = -1;
-		let count_panel_terlewat = 0;
+		if (this.observer) this.observer.disconnect();
+		if (this.resizeObserver) this.resizeObserver.disconnect();
 		
-		panel_entry.forEach(entry => {
-			const index = parseInt(entry.target.getAttribute('data-index'));
-			const rect = entry.target.getBoundingClientRect();
-			const imageBottom = rect.bottom;
+		const self = this;
+		const middleViewport = window.innerHeight / 2;
+		let lastValidIndex = 0;
+		
+		this.observer = new IntersectionObserver((panel_entry) => {
+			let index_panel_active = -1;
+			let count_panel_terlewat = 0;
 			
-			if (imageBottom < 0) {
-				count_panel_terlewat++;
-			} else if (imageBottom >= middleViewport) {
-				index_panel_active = index;
+			panel_entry.forEach(entry => {
+				const index = parseInt(entry.target.getAttribute('data-index'));
+				const rect = entry.target.getBoundingClientRect();
+				const imageBottom = rect.bottom;
+				
+				if (imageBottom < 0) {
+					count_panel_terlewat++;
+				} else if (imageBottom >= middleViewport) {
+					index_panel_active = index;
+				}
+			});
+			
+			if (index_panel_active >= 0) {
+				lastValidIndex = index_panel_active;
+			} else {
+				index_panel_active = lastValidIndex; // Menggunakan index terakhir yang valid
 			}
+			
+			requestAnimationFrame(() => {
+				self.active_panel_read = index_panel_active;
+				self.passed_panel_count = count_panel_terlewat;
+				self.update_pageOf_panelManga();
+				self._update_mini_preview_active();
+			});
+		}, {
+			root: null,
+			rootMargin: '0px',
+			threshold: [0]
 		});
 		
-		if (index_panel_active >= 0) {
-			lastValidIndex = index_panel_active;
-		} else {
-			index_panel_active = lastValidIndex; // Menggunakan index terakhir yang valid
-		}
+		this.resizeObserver = new ResizeObserver(entries => {
+			entries.forEach(entry => {
+				if (entry.target) self.observer.observe(entry.target);
+			});
+		});
 		
-		requestAnimationFrame(() => {
-			self.active_panel_read = index_panel_active;
-			self.passed_panel_count = count_panel_terlewat;
-			self.update_pageOf_panelManga();
-			self._update_mini_preview_active();
+		document.querySelectorAll('.longstrip-slide img').forEach(img => {
+			self.observer.observe(img);
+			self.resizeObserver.observe(img);
 		});
-	}, {
-		root: null,
-		rootMargin: '0px',
-		threshold: [0]
-	});
+	}
 	
-	this.resizeObserver = new ResizeObserver(entries => {
-		entries.forEach(entry => {
-			if (entry.target) self.observer.observe(entry.target);
-		});
-	});
-	
-	document.querySelectorAll('.longstrip-slide img').forEach(img => {
-		self.observer.observe(img);
-		self.resizeObserver.observe(img);
-	});
-}
-
 	
 	/*========================================================
  Tap Scroll mode longstrip (beta) 
@@ -806,50 +806,50 @@ if (reverse_swipe_nextprev) {
  * Support Left/right tap to scroll 
 	=========================================================*/
 	_runLongstripScroll() {
-	const cc_e_longstrip = document.getElementById('longstrip_box');
-	let scroll_px = 400; // Jumlah scroll dalam piksel (sesuaikan sesuai kebutuhan)
-	
-	if (!cc_e_longstrip) return;
-	
-	// Fungsi untuk scroll ke atas
-	function scrollUp() {
-		window.scrollBy({
-			top: -scroll_px,
-			behavior: 'smooth'
+		const cc_e_longstrip = document.getElementById('longstrip_box');
+		let scroll_px = 400; // Jumlah scroll dalam piksel (sesuaikan sesuai kebutuhan)
+		
+		if (!cc_e_longstrip) return;
+		
+		// Fungsi untuk scroll ke atas
+		function scrollUp() {
+			window.scrollBy({
+				top: -scroll_px,
+				behavior: 'smooth'
+			});
+		}
+		
+		// Fungsi untuk scroll ke bawah
+		function scrollDown() {
+			window.scrollBy({
+				top: scroll_px,
+				behavior: 'smooth'
+			});
+		}
+		
+		// Event Listener untuk klik kiri & kanan
+		cc_e_longstrip.addEventListener('click', (event) => {
+			const rect = cc_e_longstrip.getBoundingClientRect();
+			const clickX = event.clientX - rect.left;
+			const width = rect.width;
+			
+			// Area klik kiri & kanan (25% kiri dan 25% kanan)
+			const leftArea = width * 0.25;
+			const rightArea = width * 0.75;
+			
+			// Klik di kiri -> Scroll ke atas
+			if (clickX <= leftArea) scrollUp();
+			
+			// Klik di kanan -> Scroll ke bawah
+			if (clickX >= rightArea) scrollDown();
 		});
 	}
-	
-	// Fungsi untuk scroll ke bawah
-	function scrollDown() {
-		window.scrollBy({
-			top: scroll_px,
-			behavior: 'smooth'
-		});
-	}
-	
-	// Event Listener untuk klik kiri & kanan
-	cc_e_longstrip.addEventListener('click', (event) => {
-		const rect = cc_e_longstrip.getBoundingClientRect();
-		const clickX = event.clientX - rect.left;
-		const width = rect.width;
-		
-		// Area klik kiri & kanan (25% kiri dan 25% kanan)
-		const leftArea = width * 0.25;
-		const rightArea = width * 0.75;
-		
-		// Klik di kiri -> Scroll ke atas
-		if (clickX <= leftArea) scrollUp();
-		
-		// Klik di kanan -> Scroll ke bawah
-		if (clickX >= rightArea) scrollDown();
-	});
-}
 	/*========================================================
 	Hitung active / Jumlah totals panel Manga
 	=========================================================*/
 	update_pageOf_panelManga() {
 		const pageInfo = document.getElementById('page_panel_active_info');
-		pageInfo.textContent = `${this.active_panel_read}/${this.total_panelmanga}`;
+		pageInfo.textContent = `${this.active_panel_read} / ${this.total_panelmanga}`;
 	}
 	
 	/*========================================================
@@ -933,53 +933,53 @@ if (reverse_swipe_nextprev) {
 	 * _update_mini_preview_active() dengan Auto-Detect Scroll Type (Horizontal/Vertical)
 	 * 
 	 ******************************************************/
-	 _update_mini_preview_active() {
-	let _mini_preview_div = null;
-	
-	if (this._mode_reading_hr === 'longstrip') {
-		_mini_preview_div = document.getElementById('mini_preview_longstrip_div_cc');
-	} else {
-		_mini_preview_div = document.getElementById('mini_preview_ltr_rtl_vertical_div_cc');
-	}
-	
-	if (!_mini_preview_div) return;
-	
-	const mini_preview_gambar = _mini_preview_div.querySelectorAll('img');
-	let activeIndex_panel_hr = this.active_panel_read;
-	
-	let prevActive = _mini_preview_div.querySelector('.active');
-	if (prevActive) prevActive.classList.remove('active');
-	
-	let activeThumb = _mini_preview_div.querySelector(`img[data-index="${activeIndex_panel_hr - 1}"]`);
-	if (activeThumb) {
-		activeThumb.classList.add('active');
+	_update_mini_preview_active() {
+		let _mini_preview_div = null;
 		
-		const rect = activeThumb.getBoundingClientRect();
-		const containerRect = _mini_preview_div.getBoundingClientRect();
+		if (this._mode_reading_hr === 'longstrip') {
+			_mini_preview_div = document.getElementById('mini_preview_longstrip_div_cc');
+		} else {
+			_mini_preview_div = document.getElementById('mini_preview_ltr_rtl_vertical_div_cc');
+		}
 		
-		// detect Scroll Type (Vertical / Horizontal)
-		const _vertical_active = _mini_preview_div.scrollHeight > _mini_preview_div.clientHeight;
-		const _horizontal_active = _mini_preview_div.scrollWidth > _mini_preview_div.clientWidth;
+		if (!_mini_preview_div) return;
 		
-		if (_vertical_active) {
-			// Scroll Y (Vertical)
-			const offsetTop = activeThumb.offsetTop - (_mini_preview_div.clientHeight / 2) + (activeThumb.clientHeight / 2);
-			const _scrollY_active = rect.top >= containerRect.top && rect.bottom <= containerRect.bottom;
+		const mini_preview_gambar = _mini_preview_div.querySelectorAll('img');
+		let activeIndex_panel_hr = this.active_panel_read;
+		
+		let prevActive = _mini_preview_div.querySelector('.active');
+		if (prevActive) prevActive.classList.remove('active');
+		
+		let activeThumb = _mini_preview_div.querySelector(`img[data-index="${activeIndex_panel_hr - 1}"]`);
+		if (activeThumb) {
+			activeThumb.classList.add('active');
 			
-			if (!_scrollY_active) {
-				_mini_preview_div.scrollTop = offsetTop;
-			}
-		} else if (_horizontal_active) {
-			// Scroll X (Horizontal)
-			const offsetLeft = activeThumb.offsetLeft - (_mini_preview_div.clientWidth / 2) + (activeThumb.clientWidth / 2);
-			const _scrollX_active = rect.left >= containerRect.left && rect.right <= containerRect.right;
+			const rect = activeThumb.getBoundingClientRect();
+			const containerRect = _mini_preview_div.getBoundingClientRect();
 			
-			if (!_scrollX_active) {
-				_mini_preview_div.scrollLeft = offsetLeft;
+			// detect Scroll Type (Vertical / Horizontal)
+			const _vertical_active = _mini_preview_div.scrollHeight > _mini_preview_div.clientHeight;
+			const _horizontal_active = _mini_preview_div.scrollWidth > _mini_preview_div.clientWidth;
+			
+			if (_vertical_active) {
+				// Scroll Y (Vertical)
+				const offsetTop = activeThumb.offsetTop - (_mini_preview_div.clientHeight / 2) + (activeThumb.clientHeight / 2);
+				const _scrollY_active = rect.top >= containerRect.top && rect.bottom <= containerRect.bottom;
+				
+				if (!_scrollY_active) {
+					_mini_preview_div.scrollTop = offsetTop;
+				}
+			} else if (_horizontal_active) {
+				// Scroll X (Horizontal)
+				const offsetLeft = activeThumb.offsetLeft - (_mini_preview_div.clientWidth / 2) + (activeThumb.clientWidth / 2);
+				const _scrollX_active = rect.left >= containerRect.left && rect.right <= containerRect.right;
+				
+				if (!_scrollX_active) {
+					_mini_preview_div.scrollLeft = offsetLeft;
+				}
 			}
 		}
 	}
-}
 	/*========================================================
 	run: Lazyload Manga (Beta)
 	=========================================================*/
@@ -1033,147 +1033,147 @@ if (reverse_swipe_nextprev) {
  * ✔ Reset zoom jika slide tidak active 
  * ✔ Drag Saat Zoom dengan 2 Jari: drag gambar secara bersamaan dengan zooming menggunakan dua jari
  ========================================================*/
- run_TachiyomiZoom(img) {
-	let config = {
-		maxScale: 3, //maksimum zoom
-		minScale: 1, //minimum zoom
-		zoomSpeed: 0.2, //animasi zoom
-		smoothDrag: 0.2, //kehalusan drag gambar.
-		resetSpeed: 0.1, //Waktu reset saat zoom keluar.
-		boundsPadding: 20 //batas gerakan gambar
-	};
-	
-	let scale = 1,
-		lastScale = 1,
-		isDragging = false,
-		startX, startY,
-		translateX = 0,
-		translateY = 0,
-		lastTouchTime = 0,
-		originX = 50,
-		originY = 50,
-		initialMidX = 0,
-		initialMidY = 0;
-	
-	const container = img.closest(".manga-page");
-	const swiperSlide = img.closest(".swiper-slide");
-	
-	const resetZoom = () => {
-		scale = 1;
-		lastScale = 1;
-		translateX = 0;
-		translateY = 0;
-		img.style.transition = `transform ${config.resetSpeed}s ease`;
-		img.style.transform = `scale(1) translate(0px, 0px)`;
-	};
-	
-	const observer = new MutationObserver(() => {
-		if (!swiperSlide.classList.contains("swiper-slide-active")) resetZoom();
-	});
-	observer.observe(swiperSlide, { attributes: true, attributeFilter: ["class"] });
-	
-	img.addEventListener("touchend", (e) => {
-		let now = new Date().getTime();
-		if (now - lastTouchTime < 300 && e.touches.length === 0) {
-			e.preventDefault();
-			let rect = img.getBoundingClientRect();
-			let touch = e.changedTouches[0];
-			
-			originX = ((touch.clientX - rect.left) / rect.width) * 100;
-			originY = ((touch.clientY - rect.top) / rect.height) * 100;
-			
-			scale = scale > 1 ? 1 : config.maxScale;
+	run_TachiyomiZoom(img) {
+		let config = {
+			maxScale: 3, //maksimum zoom
+			minScale: 1, //minimum zoom
+			zoomSpeed: 0.2, //animasi zoom
+			smoothDrag: 0.2, //kehalusan drag gambar.
+			resetSpeed: 0.1, //Waktu reset saat zoom keluar.
+			boundsPadding: 20 //batas gerakan gambar
+		};
+		
+		let scale = 1,
+			lastScale = 1,
+			isDragging = false,
+			startX, startY,
+			translateX = 0,
+			translateY = 0,
+			lastTouchTime = 0,
+			originX = 50,
+			originY = 50,
+			initialMidX = 0,
+			initialMidY = 0;
+		
+		const container = img.closest(".manga-page");
+		const swiperSlide = img.closest(".swiper-slide");
+		
+		const resetZoom = () => {
+			scale = 1;
+			lastScale = 1;
 			translateX = 0;
 			translateY = 0;
-			
-			img.style.transition = `transform ${config.zoomSpeed}s ease`;
-			img.style.transformOrigin = `${originX}% ${originY}%`;
-			img.style.transform = `scale(${scale}) translate(0px, 0px)`;
+			img.style.transition = `transform ${config.resetSpeed}s ease`;
+			img.style.transform = `scale(1) translate(0px, 0px)`;
+		};
+		
+		const observer = new MutationObserver(() => {
+			if (!swiperSlide.classList.contains("swiper-slide-active")) resetZoom();
+		});
+		observer.observe(swiperSlide, { attributes: true, attributeFilter: ["class"] });
+		
+		img.addEventListener("touchend", (e) => {
+			let now = new Date().getTime();
+			if (now - lastTouchTime < 300 && e.touches.length === 0) {
+				e.preventDefault();
+				let rect = img.getBoundingClientRect();
+				let touch = e.changedTouches[0];
+				
+				originX = ((touch.clientX - rect.left) / rect.width) * 100;
+				originY = ((touch.clientY - rect.top) / rect.height) * 100;
+				
+				scale = scale > 1 ? 1 : config.maxScale;
+				translateX = 0;
+				translateY = 0;
+				
+				img.style.transition = `transform ${config.zoomSpeed}s ease`;
+				img.style.transformOrigin = `${originX}% ${originY}%`;
+				img.style.transform = `scale(${scale}) translate(0px, 0px)`;
+			}
+			lastTouchTime = now;
+		});
+		
+		img.addEventListener("touchstart", (e) => {
+			if (e.touches.length === 2) {
+				e.preventDefault();
+				
+				let rect = img.getBoundingClientRect();
+				let touch1 = e.touches[0];
+				let touch2 = e.touches[1];
+				
+				let midX = (touch1.clientX + touch2.clientX) / 2;
+				let midY = (touch1.clientY + touch2.clientY) / 2;
+				
+				initialMidX = midX;
+				initialMidY = midY;
+				
+				originX = ((midX - rect.left) / rect.width) * 100;
+				originY = ((midY - rect.top) / rect.height) * 100;
+				
+				img.style.transformOrigin = `${originX}% ${originY}%`;
+				
+				let dist = getDistance(touch1, touch2);
+				lastScale = scale;
+				img.dataset.startDistance = dist;
+				
+				isDragging = true;
+				startX = midX - translateX;
+				startY = midY - translateY;
+				img.style.cursor = "grabbing";
+			} else if (e.touches.length === 1 && scale > 1) {
+				isDragging = true;
+				startX = e.touches[0].clientX - translateX;
+				startY = e.touches[0].clientY - translateY;
+				img.style.cursor = "grabbing";
+			}
+		});
+		
+		img.addEventListener("touchmove", (e) => {
+			if (e.touches.length === 2) {
+				e.preventDefault();
+				
+				let touch1 = e.touches[0];
+				let touch2 = e.touches[1];
+				
+				let midX = (touch1.clientX + touch2.clientX) / 2;
+				let midY = (touch1.clientY + touch2.clientY) / 2;
+				
+				let dist = getDistance(touch1, touch2);
+				let newScale = (dist / img.dataset.startDistance) * lastScale;
+				
+				scale = Math.min(Math.max(config.minScale, newScale), config.maxScale);
+				
+				translateX = smoothTransition(translateX, midX - startX, config.smoothDrag);
+				translateY = smoothTransition(translateY, midY - startY, config.smoothDrag);
+				
+				img.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+			} else if (isDragging && e.touches.length === 1) {
+				let moveX = e.touches[0].clientX - startX;
+				let moveY = e.touches[0].clientY - startY;
+				
+				translateX = smoothTransition(translateX, moveX, config.smoothDrag);
+				translateY = smoothTransition(translateY, moveY, config.smoothDrag);
+				
+				img.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+			}
+		});
+		
+		img.addEventListener("touchend", () => {
+			isDragging = false;
+			img.style.cursor = "grab";
+		});
+		
+		function getDistance(touch1, touch2) {
+			let dx = touch2.clientX - touch1.clientX;
+			let dy = touch2.clientY - touch1.clientY;
+			return Math.sqrt(dx * dx + dy * dy);
 		}
-		lastTouchTime = now;
-	});
-	
-	img.addEventListener("touchstart", (e) => {
-		if (e.touches.length === 2) {
-			e.preventDefault();
-			
-			let rect = img.getBoundingClientRect();
-			let touch1 = e.touches[0];
-			let touch2 = e.touches[1];
-			
-			let midX = (touch1.clientX + touch2.clientX) / 2;
-			let midY = (touch1.clientY + touch2.clientY) / 2;
-			
-			initialMidX = midX;
-			initialMidY = midY;
-			
-			originX = ((midX - rect.left) / rect.width) * 100;
-			originY = ((midY - rect.top) / rect.height) * 100;
-			
-			img.style.transformOrigin = `${originX}% ${originY}%`;
-			
-			let dist = getDistance(touch1, touch2);
-			lastScale = scale;
-			img.dataset.startDistance = dist;
-			
-			isDragging = true;
-			startX = midX - translateX;
-			startY = midY - translateY;
-			img.style.cursor = "grabbing";
-		} else if (e.touches.length === 1 && scale > 1) {
-			isDragging = true;
-			startX = e.touches[0].clientX - translateX;
-			startY = e.touches[0].clientY - translateY;
-			img.style.cursor = "grabbing";
+		
+		function smoothTransition(current, target, smoothness) {
+			return current + (target - current) * smoothness;
 		}
-	});
-	
-	img.addEventListener("touchmove", (e) => {
-		if (e.touches.length === 2) {
-			e.preventDefault();
-			
-			let touch1 = e.touches[0];
-			let touch2 = e.touches[1];
-			
-			let midX = (touch1.clientX + touch2.clientX) / 2;
-			let midY = (touch1.clientY + touch2.clientY) / 2;
-			
-			let dist = getDistance(touch1, touch2);
-			let newScale = (dist / img.dataset.startDistance) * lastScale;
-			
-			scale = Math.min(Math.max(config.minScale, newScale), config.maxScale);
-			
-			translateX = smoothTransition(translateX, midX - startX, config.smoothDrag);
-			translateY = smoothTransition(translateY, midY - startY, config.smoothDrag);
-			
-			img.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
-		} else if (isDragging && e.touches.length === 1) {
-			let moveX = e.touches[0].clientX - startX;
-			let moveY = e.touches[0].clientY - startY;
-			
-			translateX = smoothTransition(translateX, moveX, config.smoothDrag);
-			translateY = smoothTransition(translateY, moveY, config.smoothDrag);
-			
-			img.style.transform = `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
-		}
-	});
-	
-	img.addEventListener("touchend", () => {
-		isDragging = false;
-		img.style.cursor = "grab";
-	});
-	
-	function getDistance(touch1, touch2) {
-		let dx = touch2.clientX - touch1.clientX;
-		let dy = touch2.clientY - touch1.clientY;
-		return Math.sqrt(dx * dx + dy * dy);
 	}
 	
-	function smoothTransition(current, target, smoothness) {
-		return current + (target - current) * smoothness;
-	}
-}
-
 	/*======================================================== 
  * SETUP Zoom in/out v2 untuk longstrip
  * by roka 
@@ -1182,146 +1182,146 @@ if (reverse_swipe_nextprev) {
  * ✔ Zoom sesuai titik tap. 
 	========================================================*/
 	run_pinch_SizeMargin() {
-	const containerLongStrip = document.querySelector('.longstrip_box');
-	let config = {
-		maxMargin: 120,
-		minMarginThreshold: -20,
-		dragSpeed: 0.6,
-		zoomSpeed: 0.8,
-		zoomScale: 3 // zoom saat double-click
-	};
-	
-	let startMarginLeft = 0;
-	let startMarginRight = 0;
-	let startDistance = 0;
-	let startX = 0;
-	let startY = 0;
-	let isPinching = false;
-	let isDragging = false;
-	let isZoomedIn = false;
-	
-	let savedMarginLeft = parseFloat(localStorage.getItem('longstripMarginLeft')) || 0;
-	let savedMarginRight = parseFloat(localStorage.getItem('longstripMarginRight')) || 0;
-	
-	containerLongStrip.style.marginLeft = `${savedMarginLeft}px`;
-	containerLongStrip.style.marginRight = `${savedMarginRight}px`;
-	
-	containerLongStrip.addEventListener('touchstart', (e) => {
-		if (e.touches.length === 2) {
-			isPinching = true;
-			isDragging = true;
-			startDistance = getDistance(e.touches[0], e.touches[1]);
-			startMarginLeft = parseFloat(getComputedStyle(containerLongStrip).marginLeft) || 0;
-			startMarginRight = parseFloat(getComputedStyle(containerLongStrip).marginRight) || 0;
-			
-			startX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-			startY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-		} else if (e.touches.length === 1) {
-			isPinching = false;
-			isDragging = true;
-			startX = e.touches[0].clientX;
-			startMarginLeft = parseFloat(getComputedStyle(containerLongStrip).marginLeft) || 0;
-			startMarginRight = parseFloat(getComputedStyle(containerLongStrip).marginRight) || 0;
-		}
-	});
-	
-	containerLongStrip.addEventListener('touchmove', (e) => {
-		if (isPinching && e.touches.length === 2) {
-			e.preventDefault();
-			let newDistance = getDistance(e.touches[0], e.touches[1]);
-			let moveFactor = (startDistance - newDistance) * config.zoomSpeed;
-			
-			let newMarginLeft = Math.max(-config.maxMargin, Math.min(startMarginLeft + moveFactor, config.maxMargin));
-			let newMarginRight = Math.max(-config.maxMargin, Math.min(startMarginRight + moveFactor, config.maxMargin));
-			
-			containerLongStrip.style.marginLeft = `${newMarginLeft}px`;
-			containerLongStrip.style.marginRight = `${newMarginRight}px`;
-			
-			localStorage.setItem('longstripMarginLeft', newMarginLeft);
-			localStorage.setItem('longstripMarginRight', newMarginRight);
-			
-			isZoomedIn = (newMarginLeft !== 0 || newMarginRight !== 0);
-			
-			let midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-			let midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-			
-			let moveX = (midX - startX) * config.dragSpeed;
-			let moveY = (midY - startY) * config.dragSpeed;
-			
-			containerLongStrip.style.transform = `translate(${moveX}px, ${moveY}px)`;
-		} else if (isDragging && e.touches.length === 1) {
-			if (startMarginLeft > config.minMarginThreshold && startMarginRight > config.minMarginThreshold) return;
-			
-			let moveX = (e.touches[0].clientX - startX) * config.dragSpeed;
-			let newMarginLeft = startMarginLeft + moveX;
-			let newMarginRight = startMarginRight - moveX;
-			
-			if (newMarginLeft > 0 && newMarginRight < 0) {
-				newMarginLeft = Math.max(0, newMarginLeft);
-				newMarginRight = Math.min(0, newMarginRight);
-			} else if (newMarginRight > 0 && newMarginLeft < 0) {
-				newMarginRight = Math.max(0, newMarginRight);
-				newMarginLeft = Math.min(0, newMarginLeft);
+		const containerLongStrip = document.querySelector('.longstrip_box');
+		let config = {
+			maxMargin: 120,
+			minMarginThreshold: -20,
+			dragSpeed: 0.6,
+			zoomSpeed: 0.8,
+			zoomScale: 3 // zoom saat double-click
+		};
+		
+		let startMarginLeft = 0;
+		let startMarginRight = 0;
+		let startDistance = 0;
+		let startX = 0;
+		let startY = 0;
+		let isPinching = false;
+		let isDragging = false;
+		let isZoomedIn = false;
+		
+		let savedMarginLeft = parseFloat(localStorage.getItem('longstripMarginLeft')) || 0;
+		let savedMarginRight = parseFloat(localStorage.getItem('longstripMarginRight')) || 0;
+		
+		containerLongStrip.style.marginLeft = `${savedMarginLeft}px`;
+		containerLongStrip.style.marginRight = `${savedMarginRight}px`;
+		
+		containerLongStrip.addEventListener('touchstart', (e) => {
+			if (e.touches.length === 2) {
+				isPinching = true;
+				isDragging = true;
+				startDistance = getDistance(e.touches[0], e.touches[1]);
+				startMarginLeft = parseFloat(getComputedStyle(containerLongStrip).marginLeft) || 0;
+				startMarginRight = parseFloat(getComputedStyle(containerLongStrip).marginRight) || 0;
+				
+				startX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+				startY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+			} else if (e.touches.length === 1) {
+				isPinching = false;
+				isDragging = true;
+				startX = e.touches[0].clientX;
+				startMarginLeft = parseFloat(getComputedStyle(containerLongStrip).marginLeft) || 0;
+				startMarginRight = parseFloat(getComputedStyle(containerLongStrip).marginRight) || 0;
 			}
+		});
+		
+		containerLongStrip.addEventListener('touchmove', (e) => {
+			if (isPinching && e.touches.length === 2) {
+				e.preventDefault();
+				let newDistance = getDistance(e.touches[0], e.touches[1]);
+				let moveFactor = (startDistance - newDistance) * config.zoomSpeed;
+				
+				let newMarginLeft = Math.max(-config.maxMargin, Math.min(startMarginLeft + moveFactor, config.maxMargin));
+				let newMarginRight = Math.max(-config.maxMargin, Math.min(startMarginRight + moveFactor, config.maxMargin));
+				
+				containerLongStrip.style.marginLeft = `${newMarginLeft}px`;
+				containerLongStrip.style.marginRight = `${newMarginRight}px`;
+				
+				localStorage.setItem('longstripMarginLeft', newMarginLeft);
+				localStorage.setItem('longstripMarginRight', newMarginRight);
+				
+				isZoomedIn = (newMarginLeft !== 0 || newMarginRight !== 0);
+				
+				let midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+				let midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+				
+				let moveX = (midX - startX) * config.dragSpeed;
+				let moveY = (midY - startY) * config.dragSpeed;
+				
+				containerLongStrip.style.transform = `translate(${moveX}px, ${moveY}px)`;
+			} else if (isDragging && e.touches.length === 1) {
+				if (startMarginLeft > config.minMarginThreshold && startMarginRight > config.minMarginThreshold) return;
+				
+				let moveX = (e.touches[0].clientX - startX) * config.dragSpeed;
+				let newMarginLeft = startMarginLeft + moveX;
+				let newMarginRight = startMarginRight - moveX;
+				
+				if (newMarginLeft > 0 && newMarginRight < 0) {
+					newMarginLeft = Math.max(0, newMarginLeft);
+					newMarginRight = Math.min(0, newMarginRight);
+				} else if (newMarginRight > 0 && newMarginLeft < 0) {
+					newMarginRight = Math.max(0, newMarginRight);
+					newMarginLeft = Math.min(0, newMarginLeft);
+				}
+				
+				containerLongStrip.style.marginLeft = `${newMarginLeft}px`;
+				containerLongStrip.style.marginRight = `${newMarginRight}px`;
+				
+				localStorage.setItem('longstripMarginLeft', newMarginLeft);
+				localStorage.setItem('longstripMarginRight', newMarginRight);
+			}
+		});
+		
+		containerLongStrip.addEventListener('touchend', () => {
+			isPinching = false;
+			isDragging = false;
+			containerLongStrip.style.transform = 'translate(0, 0)';
+		});
+		
+		containerLongStrip.addEventListener('dblclick', (e) => {
+			if (!isZoomedIn) {
+				zoomToArea(e.clientX, e.clientY);
+			} else {
+				resetMargin();
+			}
+		});
+		
+		function zoomToArea(x, y) {
+			const rect = containerLongStrip.getBoundingClientRect();
+			const offsetX = x - rect.left;
+			const offsetY = y - rect.top;
 			
-			containerLongStrip.style.marginLeft = `${newMarginLeft}px`;
-			containerLongStrip.style.marginRight = `${newMarginRight}px`;
+			const scaleX = config.zoomScale;
+			const scaleY = config.zoomScale;
 			
-			localStorage.setItem('longstripMarginLeft', newMarginLeft);
-			localStorage.setItem('longstripMarginRight', newMarginRight);
+			containerLongStrip.style.transformOrigin = `${(offsetX / rect.width) * 100}% ${(offsetY / rect.height) * 100}%`;
+			containerLongStrip.style.transform = `scale(${scaleX}, ${scaleY})`;
+			
+			isZoomedIn = true;
 		}
-	});
-	
-	containerLongStrip.addEventListener('touchend', () => {
-		isPinching = false;
-		isDragging = false;
-		containerLongStrip.style.transform = 'translate(0, 0)';
-	});
-	
-	containerLongStrip.addEventListener('dblclick', (e) => {
-		if (!isZoomedIn) {
-			zoomToArea(e.clientX, e.clientY);
-		} else {
-			resetMargin();
+		
+		function resetMargin() {
+			containerLongStrip.style.marginLeft = '0px';
+			containerLongStrip.style.marginRight = '0px';
+			containerLongStrip.style.transform = 'scale(1)';
+			localStorage.removeItem('longstripMarginLeft');
+			localStorage.removeItem('longstripMarginRight');
+			isZoomedIn = false;
 		}
-	});
-	
-	function zoomToArea(x, y) {
-		const rect = containerLongStrip.getBoundingClientRect();
-		const offsetX = x - rect.left;
-		const offsetY = y - rect.top;
 		
-		const scaleX = config.zoomScale;
-		const scaleY = config.zoomScale;
-		
-		containerLongStrip.style.transformOrigin = `${(offsetX / rect.width) * 100}% ${(offsetY / rect.height) * 100}%`;
-		containerLongStrip.style.transform = `scale(${scaleX}, ${scaleY})`;
-		
-		isZoomedIn = true;
+		function getDistance(touch1, touch2) {
+			let dx = touch2.clientX - touch1.clientX;
+			let dy = touch2.clientY - touch1.clientY;
+			return Math.sqrt(dx * dx + dy * dy);
+		}
 	}
-	
-	function resetMargin() {
-		containerLongStrip.style.marginLeft = '0px';
-		containerLongStrip.style.marginRight = '0px';
-		containerLongStrip.style.transform = 'scale(1)';
-		localStorage.removeItem('longstripMarginLeft');
-		localStorage.removeItem('longstripMarginRight');
-		isZoomedIn = false;
-	}
-	
-	function getDistance(touch1, touch2) {
-		let dx = touch2.clientX - touch1.clientX;
-		let dy = touch2.clientY - touch1.clientY;
-		return Math.sqrt(dx * dx + dy * dy);
-	}
-}
 }
 
 /************************************************************
  * Btn Mode Reader
  * Inital Script MangaReader 
  ************************************************************/
- document.querySelectorAll('.mode-btn').forEach(button => {
+document.querySelectorAll('.mode-btn').forEach(button => {
 	button.addEventListener('click', () => {
 		document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
 		button.classList.add('active');
@@ -1360,7 +1360,7 @@ if (reverse_swipe_nextprev) {
 			window.reader = new MangaReader(_set_options_mode_reading);
 		}
 		setTimeout(() => {
-		location.reload();
+			location.reload();
 		}, 1000);
 	});
 });
