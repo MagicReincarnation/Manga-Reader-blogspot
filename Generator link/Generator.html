@@ -4,58 +4,131 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Convert HTML image ke array link</title>
+	<title>Convert HTML image to array link</title>
+	<!-- CDN JSZip -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+	
 	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+	
 	<div class="getlink_manga">
-		<h2>Convert html image to array Link</h2>
+		<h2>Convert HTML image to array Link</h2>
 		<div class="tab_gen">
 			<button data-mode="mode_link" onclick="switchTab('mode_link')">Otomatis (URL)</button>
 			<button data-mode="manual" onclick="switchTab('manual')">Manual (HTML)</button>
 		</div>
 		
 		<!-- Mode Link -->
-		<div id="mode_link" class="content active">
-			<input type="text" id="postUrl" placeholder="Masukkan URL post manga">
-			<div class="video_tutorial">
-				<h5>Tutorial</h5>
-			<iframe src="https://youtube.com/embed/rHwMSFSi3Hs?si=haF1tU2xnPXqdot2" frameborder="0"></iframe>
-			</div>
-			<h3>Selector Article</h3>
-			<p>ID:<small>untuk menentukan area konten post.</small></p>
-		 <p>EN: <small>to define the post content area.</small></p>
-		 <p>
-			<small>- Contoh/Example: `.post-body`, `article`, `.postget`,`.check-box`</small></p>
-			<input type="text" id="tag_article_selector" placeholder="Input Selector Article">
-	
-			<h3>Selector Image</h3>
-			<p>ID:<small>untuk menentukan elemen src gambar yang ingin diambil.</small></p>
-		<p>	EN: <small>to specify the src element of the image to be retrieved.</small></p>
-		<p><small>- Contoh/Example: `.separator a img`, `.post img`</small></p>
-			<div class="input_target_img">
-				<label for="imageSelector"></label>
-				<input type="text" id="tag_img_selector" placeholder="Input Selector Image">
-				<button onclick="edit_local_selector()">Update Selector</button>
+		<div id="mode_link" class="content">
+			<input type="text" id="postUrl" placeholder="Input URL Chapter">
+			
+			<label for="mode_get_link">Choose Thema:</label>
+			<select id="mode_get_link">
+				<option value="selector">Custom (blogspot)</option>
+				<option value="zeistmanga_v5">Zeistmanga v5</option>
+				<option value="zeistmanga_v6">Zeistmanga v6</option>
+				<option value="kienzia">Zeistmanga v6 (kienzia)</option>
+				<option value="westmanga">WestManga</option>
+				<option value="zeistmaid">Zeistmaid</option>
+			</select>
+			
+			<br />
+			
+			<div class="divhidden">
+				<hr />
+				<br />
+				<div class="video_tutorial">
+					<details>
+						<summary>Tutorial</summary>
+						<iframe src="https://youtube.com/embed/rHwMSFSi3Hs?si=haF1tU2xnPXqdot2" frameborder="0"></iframe>
+					</details>
+				</div>
+				<hr />
+				<br />
 				
+				<h3>Selector Article</h3>
+				<details>
+					<summary>Notes</summary>
+					<p>ID:<small>untuk menentukan area konten post.</small></p>
+					<p>EN: <small>to define the post content area.</small></p>
+					<p><small>- Contoh/Example: `.post-body`, `article`, `.postget`,`.check-box`</small></p>
+				</details>
+				<input type="text" id="tag_article_selector" placeholder="Input Selector Article">
+				<br />
+				<h3>Selector Image</h3>
+				<details>
+					<summary>Notes</summary>
+					<p>ID:<small>untuk menentukan elemen src gambar yang ingin diambil.</small></p>
+					<p> EN: <small>to specify the src element of the image to be retrieved.</small></p>
+					<p><small>- Contoh/Example: `.separator a img`, `.post img`</small></p>
+				</details>
+				<div class="input_target_img">
+					<label for="imageSelector"></label>
+					<input type="text" id="tag_img_selector" placeholder="Input Selector Image">
+					<button onclick="edit_local_selector()">Update Selector</button>
+				</div>
 			</div>
+			
+			
 			<hr />
 			<button id="run_getlink" onclick="generate_mode_link()">Convert to array Link</button>
 		</div>
 		
 		<!-- Mode Manual -->
-		<div id="manual" class="content">
+		<div id="manual" class="content active">
 			<h3>Input HTML post</h3>
 			<textarea id="manualHtml" placeholder="Input HTML Image post here.."></textarea>
 			<button onclick="generate_mode_manual()">Convert to array Link</button>
 		</div>
 		
 		<h3>Ouput</h3>
-		<textarea placeholder="Ouput link array..." id="output_linkmanga"></textarea>
+		<textarea placeholder="Ouput link array..." id="output_linkmanga">
+		</textarea>
 		<button onclick="copyoutput_linkmanga()">Copy Output</button>
+		<button id="download_zip">Download as ZIP</button>
 	</div>
 	
+	
+	<div id="_custom_title_download" class="ntf_g_modal" style="display: none;">
+		<div class="ntf_g_content ntf_g_confirm">
+			<h5 class="ntf_g_title">Title Series</h5>
+			<p class="ntf_g_text"><input type="text" id="title-series" name="title-series" placeholder="series..."></p>
+			<h5 class="ntf_g_title">Title Chapter</h5>
+			<p class="ntf_g_text"><input type="number" id="title-chapter" name="title-chapter" placeholder="001.."></p>
+			<div class="ntf_g_actions">
+				<button class="ntf_g_button cancel">Cancel</button>
+				<button class="ntf_g_button confirm">Save</button>
+			</div>
+		</div>
+	</div>
+	
+
+	
+	<script type="text/javascript">
+		const _config_mode_link = {
+			proxy: [
+				"https://api.allorigins.win/raw?url=",
+				"https://api.codetabs.com/v1/proxy?quest=",
+				"https://corsproxy.io/?"
+			],
+			selector: {
+				kienzia: { tag_post: ".postget", img: "img" },
+				zeistmanga_v6: { tag_post: ".post-body", img: "img" },
+				zeistmanga_v5: { tag_post: ".check-box", img: "img" },
+				zeistmaid: { tag_post: ".mangachp", img: "img" }
+			},
+			default_mode_selector: "selector", // Bisa diubah ke "zeistmanga_v6" atau lainnya, default ya "selector".
+			
+			img: {
+				fitur_custom_regex_url_convert: true,
+				custom_regex_url_convert: /s\d{2,4}/g,
+				ouput_url: "s1600",
+			}
+		};
+	</script>
 	<script src="main.js" type="text/javascript"></script>
 </body>
 

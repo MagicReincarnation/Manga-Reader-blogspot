@@ -76,7 +76,7 @@ span#page_panel_active_info {
  background: crimson;
 }
 
-/* untuk Swiper (LTR, RTL, Vertikal) */
+/* Container untuk Swiper (LTR, RTL, Vertikal) */
 .swiper-container {
  position: relative;
  width: 100%;
@@ -101,7 +101,7 @@ span#page_panel_active_info {
  object-fit: contain;
 }
 
-/* Longstrip */
+/* Container untuk Longstrip */
 .longstrip-container {
  position: relative;
 }
@@ -122,7 +122,7 @@ span#page_panel_active_info {
  display: block;
 }
 
-/* Mini Preview: ltr & rtl tampil di bawah, vertical & longstrip tampil di kiri */
+/* Mini Preview: horizontal tampil di bawah, vertikal tampil di kiri */
 .mini-preview.bottom {
  position: fixed;
  bottom: 0;
@@ -141,7 +141,7 @@ span#page_panel_active_info {
  top: 0;
  bottom: 0;
  left: 0;
- width: 120px;
+ width: 80px;
  background: rgb(0 0 0 / 15%);
  padding: 5px;
  display: flex;
@@ -205,7 +205,8 @@ img.lazy.belum_diload-off {
 }
 
 
-.manga-page.end-message {
+.manga-page.end-message, 
+.manga-page.start-message {
  word-wrap: break-word;
  text-align: center;
  display: block;
@@ -214,25 +215,44 @@ img.lazy.belum_diload-off {
  color: #eaeaea;
 }
 
-.manga-page.end-message button {
- padding: 8px 24px;
- border-radius: 6px;
- font-weight: 600;
- margin: 20px;
+.boxmessage {
+	display: flex;
+	height: 35vh;
+	width: -webkit-fill-available;
+	padding: 20px;
+	direction: ltr;
+	justify-content: center;
+	flex-direction: column;
+	gap: 25px;
+}
+.boxmessage .info {
+	border: 1px solid #ccc;
+	border-radius: 12px;
+	padding: 12px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.boxmessage .info svg {
+	vertical-align: middle;
 }
 
-.manga-page.end-message .prevbtn {
- background: #ed4c14;
- color: white;
- border: 2px solid transparent;
+.boxsc {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	text-align: left;
 }
-
-.manga-page.end-message .nextbtn {
- border: 2px solid whitesmoke;
- background: transparent;
- color: #fff;
+.boxsc [rel="prevCh"],.boxsc [rel="nextCh"] {
+	color: white;
+	text-decoration: none;
 }
-
+.boxmessage .status {
+    font-size: medium;
+    font-weight: 600;
+}
+.boxmessage .ch {
+ 	font-size: larger;
+}
 
 .divloader {
  position: absolute;
@@ -243,11 +263,12 @@ img.lazy.belum_diload-off {
  z-index: 4;
  display: grid;
  place-content: center;
+ backdrop-filter: blur(10px) brightness(0.9);
 }
 
 .spinner-loader {
- width: 40px;
- height: 40px;
+ width: 55px;
+ height: 55px;
  border: 4px solid rgba(255, 255, 255, 0.3);
  border-top-color: #fff;
  border-radius: 50%;
@@ -264,3 +285,13 @@ img.lazy.belum_diload-off {
   transform: rotate(360deg);
  }
 }
+
+/* 
+.manga-page video {
+	position: inherit;
+	min-width: 100%;
+	overflow: hidden;
+	z-index: -1;
+	width: -webkit-fill-available;
+	height: auto;
+} */

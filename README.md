@@ -3,7 +3,7 @@
 MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, LTR, dan vertikal. Fitur ini juga mendukung zoom, swipe, dan mini preview untuk navigasi yang lebih mudah.
 
 # Demo 
-  * Link: [Video](https://youtu.be/Uj22Juxilh0?si=5HwyMtHNdshOe6AD)
+  * Link v3.2: [Video](https://youtu.be/YvrSovTGqgg?si=s4_Y7WUmfRfpKAFj)
   * Live Demo: [Manga Reader](https://magicreincarnation.github.io/Manga-Reader-blogspot/)
   * Generator Link: [Generator converter](https://magicreincarnation.github.io/Manga-Reader-blogspot/Generator%20link/Generator.html)
 ---
@@ -37,19 +37,17 @@ MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, L
 # Cara pakai
 
 0. Pasang library Swiper:
+   1. Tambahkan di bagian `<head>`.
+   ```html
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    ```
+    2. Tambahkan di atas `</body>`.
+    ```html
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    ```
 
-1. Tambahkan di bagian `<head>`.
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-```
-2. Tambahkan di atas `</body>`.
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-```
 1. Tambahkan elemen ini di HTML (html article chapter manga):
-```html
+ ```html
 <!--Buang label Chapter agar bisa mendapatkan label judul series, jika terdapat label lain masukan disini-->
  <b:with value='["Chapter"]' var='checkLabel'>
   <b:if cond='data:post.labels any (i => i.name in data:checkLabel)'>
@@ -102,29 +100,43 @@ MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, L
   </b:if>
  </b:with>
 ```
-2. Tambahkan script config di atas `</body>` untuk menjalankan MangaReader:
+2. Tambahkan script dibawah di d atasnya `</body>` untuk menjalankan MangaReader:
 
 ```javascript
  <script type="text/javascript">
 		/*<![CDATA[*/
-		let _link_manga_hr = [ "manga1.jpg", "manga2.jpg", "manga3.jpg" ];
-
+/*!
+		 * Project: Manga Reader
+		 * Author: Hirutshuji
+		 * Patner: Roka
+		 * Website: https://datakodehiru.blogspot.com
+		 * Github Repo: https://github.com/MagicReincarnation/Manga-Reader-blogspot
+		 * Description: MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, LTR, dan vertikal. Fitur ini juga mendukung zoom, swipe, dan mini preview untuk navigasi yang lebih mudah.
+		 * Version: 3.3.0
+		 * License: MIT
+		 * 
+		 * Created: 2025-03-06
+		 * Last Updated: 2025-03-24
+		 * 
+		 * Copyright (c) 2025 Hirutshuji & Roka
+		 * All rights reserved.
+		 */
 // Ambil seriesId dari data attribute
 /********** run Script MangaReader **********/
 const _set_options_mode_reading = {
  seriesId: document.querySelector('.mode_manga_reader')?.dataset.label || "", // label series untuk membedakan mode tiap series
  pages: _link_manga_hr, // link gambad
- mode: 'rtl', // default; bisa diubah lewat tombol mode
- startIndex: 0, // start panel
- lazyBatch: 1,  // lazybatch pertama kali load.
- timer_loader: 500, // timer hidden loader
- compresResolusi: true, // fitur replace sxx > resolusi_higth
- resolusi_higth: 's1600', // higth reso
- resolusi_low: 's160', // low reso (thumb lazy)
- s_resolusi: "s1600", //default reso 
- default_url: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=", //custom img transparant lazy
- custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=",// custom img transparant mini preview lazy
- custom_regexURL: /s\d{2,4}/g, //custom regex
+ // mode: 'rtl', // default; bisa diubah lewat tombol mode
+ // startIndex: 0, // start panel
+ // lazyBatch: 1,  // lazybatch pertama kali load.
+ // timer_loader: 500, // timer hidden loader
+ // compresResolusi: true, // fitur replace sxx > resolusi_higth
+ // resolusi_higth: 's1600', // higth reso
+ // resolusi_low: 's160', // low reso (thumb lazy)
+ // s_resolusi: "s1600", //default reso 
+ // default_url: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=", //custom img transparant lazy
+ // custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=",// custom img transparant mini preview lazy
+ // custom_regexURL: /s\d{2,4}/g, //custom regex
 };
 // run: MangaReader Mode default saat DOM siap
 document.addEventListener('DOMContentLoaded', () => {
@@ -140,10 +152,23 @@ document.addEventListener('DOMContentLoaded', () => {
     ```html 
     <script src="https://cdn.jsdelivr.net/gh/MagicReincarnation/Manga-Reader-blogspot@main/main.js" type="text/javascript"></script>
     ```
+4. Letakan kode dibawah ini dipostingan (isi dengan link gambar)
+  
+```javascript
+ <script type="text/javascript">
+		/*<![CDATA[*/
+		let _link_manga_hr = [
+		"manga1.jpg", 
+		"manga2.jpg", 
+		"manga3.jpg" 
+		];
+		/*]]>*/
+	</script>
+```
 
 ---
 # Change Log 
-## Version now 3.2.0
+## Version now 3.3.0
 ###  3.0.0 
   1. rilis awal.
 
@@ -156,8 +181,16 @@ document.addEventListener('DOMContentLoaded', () => {
   2. Meningkatkan function hidebox.
   3. Zoom sesuai titik jari.
   4. menghapus observer kode [zoom].
+  5. Support Chapter next prev auto.
 
-
+### v3.3.0 
+  1. Menambahkan Info chapter/Mode 
+  2. Update Next prev auto 
+  3. Update code Mini preview 
+  4. Menambahkan tap to scroll (lrt/rtl/vertical/longstrip)
+  5. Update zoom 2 jari di mode longstrip
+  6. menambahkan default setting config.
+  7. Mengoptimalkan option MangaReader.
 ___
 
 #  Lisensi & Credit
