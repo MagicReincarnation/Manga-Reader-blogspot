@@ -104,46 +104,46 @@
 	];
 </script> 
 
- 	<script type="text/javascript">
-		/*<![CDATA[*/
-		/*!
-		 * Project: Manga Reader
-		 * Author: Hirutshuji
-		 * Patner: Roka
-		 * Website: https://datakodehiru.blogspot.com
-		 * Github Repo: https://github.com/MagicReincarnation/Manga-Reader-blogspot
-		 * Description: MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, LTR, dan vertikal. Fitur ini juga mendukung zoom, swipe, dan mini preview untuk navigasi yang lebih mudah.
-		 * Version: 3.0.0
-		 * License: MIT
-		 * 
-		 * Created: 2025-03-06
-		 * Last Updated: 2025-03-06
-		 * 
-		 * Copyright (c) 2025 Hirutshuji & Roka
-		 * All rights reserved.
-		 */
-		/********** run Script MangaReader **********/
-		const _set_options_mode_reading = {
-			seriesId: document.querySelector('.mode_manga_reader')?.dataset.label || "",
-			pages: _link_manga_hr,
-			// mode: 'rtl',
-			// startIndex: 0,
-			// lazyBatch: 1,
-			// timer_loader: 500,
-			// /*quality*/
-			// compresResolusi: true,
-			// resolusi_higth: 's1600',
-			// resolusi_low: 's160',
-			// s_resolusi: "s1600",
-			// default_url: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=",
-			// custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc: "data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=",
-			// _fitur_custom_regexURL: false,
-			// custom_regexURL: /s\d{4,4}/g,
-		};
-		// run: MangaReader Mode default saat DOM siap
-		document.addEventListener('DOMContentLoaded', () => {
-			window.reader = new MangaReader(_set_options_mode_reading);
-		});
+
+<script type="text/javascript">
+	/*<![CDATA[*/
+/*!
+ * Project: Manga Reader
+ * Author: Hirutshuji
+ * Patner: Roka
+ * Website: https://datakodehiru.blogspot.com
+ * Github Repo: https://github.com/MagicReincarnation/Manga-Reader-blogspot
+ * Description: MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, LTR, dan vertikal. Fitur ini juga mendukung zoom, swipe, dan mini preview untuk navigasi yang lebih mudah.
+ * Version: 3.3.0
+ * License: MIT
+ * 
+ * Created: 2025-03-06
+ * Last Updated: 2025-03-24
+ * 
+ * Copyright (c) 2025 Hirutshuji & Roka
+ * All rights reserved.
+ */
+const _set_options_mode_reading = {
+	
+	seriesId: document.querySelector('.mode_manga_reader')?.dataset.label || "", // label series untuk membedakan mode tiap series
+	
+	pages: _link_manga_hr, // link gambad
+	
+	mode: 'rtl', // default; bisa diubah lewat tombol mode
+	timer_auto_Hidebox: 0, // 0 = 1 jam 
+	reverse_use_click_screen: false, // reverse use_click_screen
+	use_click_screen: true, // click to swipe 
+	
+	compresResolusi: true, // fitur replace sxx > resolusi_higth
+	resolusi_higth: '/s1600-rw/', // higth reso
+	resolusi_low: '/s160-rw/', // low reso (thumb lazy)
+	s_resolusi: "/s1600-rw/", //default reso 
+	_fitur_custom_regexURL: true, // active custom_regexURL
+	custom_regexURL: /\/[swh]\d{2,4}(?:-[swh]\d{2,4})?(?:-c)?(?:-rw)?\//g, //custom regex
+};
+document.addEventListener('DOMContentLoaded', () => {
+	window.reader = new MangaReader(_set_options_mode_reading);
+});
 		/*]]>*/
 	</script>
 
