@@ -204,7 +204,7 @@
  	const _link_manga_hr = [];
  	
  	doc.querySelectorAll("img").forEach(img => {
- 		const imgSrc = fitur_custom_regex_url_convert ? img.getAttribute("src").replace(custom_regex_url_convert, ouput_url) : img.getAttribute("src");
+ 		const imgSrc = fitur_custom_regex_url_convert ? img.getAttribute("src").replace(custom_regex_url_convert, output_url) : img.getAttribute("src");
  		if (imgSrc) {
  			_link_manga_hr.push(imgSrc);
  		}
