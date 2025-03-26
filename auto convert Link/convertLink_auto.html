@@ -1,16 +1,10 @@
 <!--
  * kode ini tidak akan bekerja jika ada tag script didalam post chapternya,
 -->
- <script>
-  const post_body = `<data:post.body/>`;
- 
-  const parser_html = new DOMParser();
-  const doc_img = parser_html.parseFromString(post_body, "text/html");
-  
-  const links_ = doc_img.querySelectorAll("img");
-  const _link_manga_hr = [];
-   
-  links_.forEach(link => {
-   _link_manga_hr.push(link.href);
-  });
-  </script>
+<script>
+	const post_body = `<data:post.body/>`;
+	/*<![CDATA[*/
+	const _link_manga_hr = [...post_body.matchAll(/<img[^>]+src="([^"]+)"/g)]
+		.map(match => match[1]);
+	/*]]>*/
+</script>
