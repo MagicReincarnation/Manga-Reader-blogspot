@@ -45,7 +45,7 @@ class MangaReader {
 		this.custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc = options.custom_lazyimage_mini_preview_ltr_rtl_vertical_div_cc || 'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=';
 		this.resolusi_higth = options.resolusi_higth || '/s1600';
 		this.resolusi_low = options.resolusi_low || '/s160';
-		this.custom_regexURL = options._fitur_custom_regexURL && options.custom_regexURL || /\/s\d+/g
+		this.custom_regexURL = options._fitur_custom_regexURL && options.custom_regexURL || /\/s\d+/g;
 		this.dbname_setmode = "MangaReaderDB";
 		this.storename_setmode = "modes";
 		this.swiper_panel_hr = null;
