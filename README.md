@@ -125,7 +125,8 @@ MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, L
 	timer_auto_Hidebox: 0, // 0 = 1 jam 
 	reverse_use_click_screen: false, // reverse use_click_screen
 	use_click_screen: true, // click to swipe 
-	show_nextPrev: true, // chapter next prev auto 
+	show_nextPrev: true, // chapter next prev.
+	
 	compresResolusi: true, // fitur replace sxx > resolusi_higth
 	resolusi_higth: '/s1600-rw/', // higth reso
 	resolusi_low: '/s160-rw/', // low reso (thumb lazy)
@@ -144,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     entah dihost lewat cdn/langsung keblog.
     atau bisa pakai aja ini yang sudah dihost
     ```html 
-    <script src="https://cdn.jsdelivr.net/gh/MagicReincarnation/Manga-Reader-blogspot@main/main.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/gh/MagicReincarnation/Manga-Reader-blogspot@latest/main.min.js" type="text/javascript"></script>
     ```
 4. MANUAL POST: Letakan kode dibawah ini dipostingan (isi dengan link gambar)
   
