@@ -39,19 +39,19 @@ MangaReader untuk membaca manga dengan berbagai mode, termasuk longstrip, RTL, L
 #### 0. Pasang library Asset 
  **Swiper & BottomSheet**:
    1. Tambahkan di bagian `<head>`.
-   ```html
+ ```html
      <!--swiper-->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
      <!--bottomshet-->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MagicReincarnation/Manga-Reader-blogspot@main/asset/BottomSheet_v2/bottomSheet.css">
-    ```
+  ```
   2. Tambahkan di atas `</body>`.
-    ```html
+ ```html
     <!--swiper-->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!--bottomshet-->
-    <script src="https://cdn.jsdelivr.net/gh/MagicReincarnation/Manga-Reader-blogspot@main/asset/BottomSheet_v2/bottomSheet.js" type="text/javascript" charset="utf-8"></script>
-    ```
+    <script src="https://cdn.jsdelivr.net/gh/MagicReincarnation/Manga-Reader-blogspot@main/asset/BottomSheet_v2/bottomSheet.js" type="text/javascript" charset="utf-8"></script> 
+ ```
 
 #### 1. Tambahkan elemen di HTML (postingan chapter):
  ```html
