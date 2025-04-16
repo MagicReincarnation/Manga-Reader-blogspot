@@ -1,0 +1,50 @@
+ #btn_opensheetSet {
+  margin: 5px;
+  padding: 5px;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+ }
+ #btn_opensheetSet:hover {
+  background: crimson;
+ }
+ #btn_opensheetSet svg {
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+ }
+ #btn_opensheetSet svg path {
+  fill: white;
+ }
+ 
+ .sheet_menu_mangareader {
+  transform: translate3d(0px, 2000px, 0px);
+  background: #23272A !important;
+ }
+ 
+ .sheet_menu_mangareader .head_sheet {
+  margin: 0 20px;
+  display: flex;
+  justify-content: center;
+ }
+ 
+ .sheet_menu_mangareader .box_bar_drag_Sheet {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+ }
+ 
+ .sheet_menu_mangareader .bar_drag_Sheet {
+  display: block;
+  border-bottom: 6px solid white;
+  width: 80px;
+  border-radius: 18px;
+ }
+ 
+ .sheet_menu_mangareader .bottom-sheet-content .title_set {
+  display: block;
+  margin: 5px 0 10px 0;
+  color: #ccc;
+  font-weight: 500;
+ }
